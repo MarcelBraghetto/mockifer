@@ -1,0 +1,454 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E24C88071EEA2A1700DDFFB8 /* Mockifer.h in Headers */ = {isa = PBXBuildFile; fileRef = E24C88051EEA2A1700DDFFB8 /* Mockifer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E24C88931EEA392200DDFFB8 /* Mockifer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E24C88911EEA392200DDFFB8 /* Mockifer.mm */; };
+		E2F256811F078B45008DADA5 /* civetweb.c in Sources */ = {isa = PBXBuildFile; fileRef = E2F256671F078B45008DADA5 /* civetweb.c */; };
+		E2F256821F078B45008DADA5 /* civetweb.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256681F078B45008DADA5 /* civetweb.h */; };
+		E2F256831F078B45008DADA5 /* duk_config.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F2566C1F078B45008DADA5 /* duk_config.h */; };
+		E2F256841F078B45008DADA5 /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = E2F2566D1F078B45008DADA5 /* duktape.c */; };
+		E2F256851F078B45008DADA5 /* duktape.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F2566E1F078B45008DADA5 /* duktape.h */; };
+		E2F256861F078B45008DADA5 /* json-forwards.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256711F078B45008DADA5 /* json-forwards.h */; };
+		E2F256871F078B45008DADA5 /* json.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256721F078B45008DADA5 /* json.h */; };
+		E2F256881F078B45008DADA5 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F256731F078B45008DADA5 /* jsoncpp.cpp */; };
+		E2F256891F078B45008DADA5 /* MockiferCore.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256741F078B45008DADA5 /* MockiferCore.h */; };
+		E2F2568A1F078B45008DADA5 /* MockiferRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F256751F078B45008DADA5 /* MockiferRequest.cpp */; };
+		E2F2568B1F078B45008DADA5 /* MockiferRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256761F078B45008DADA5 /* MockiferRequest.h */; };
+		E2F2568C1F078B45008DADA5 /* MockiferResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F256771F078B45008DADA5 /* MockiferResponse.cpp */; };
+		E2F2568D1F078B45008DADA5 /* MockiferResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256781F078B45008DADA5 /* MockiferResponse.h */; };
+		E2F2568E1F078B45008DADA5 /* MockiferRoute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F256791F078B45008DADA5 /* MockiferRoute.cpp */; };
+		E2F2568F1F078B45008DADA5 /* MockiferRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F2567A1F078B45008DADA5 /* MockiferRoute.h */; };
+		E2F256901F078B45008DADA5 /* MockiferRouteManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F2567B1F078B45008DADA5 /* MockiferRouteManager.cpp */; };
+		E2F256911F078B45008DADA5 /* MockiferRouteManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F2567C1F078B45008DADA5 /* MockiferRouteManager.h */; };
+		E2F256921F078B45008DADA5 /* MockiferServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F2567D1F078B45008DADA5 /* MockiferServer.cpp */; };
+		E2F256931F078B45008DADA5 /* MockiferServer.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F2567E1F078B45008DADA5 /* MockiferServer.h */; };
+		E2F256941F078B45008DADA5 /* MockiferUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F2567F1F078B45008DADA5 /* MockiferUtil.cpp */; };
+		E2F256951F078B45008DADA5 /* MockiferUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256801F078B45008DADA5 /* MockiferUtil.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E24C88021EEA2A1700DDFFB8 /* Mockifer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mockifer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E24C88051EEA2A1700DDFFB8 /* Mockifer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mockifer.h; sourceTree = "<group>"; };
+		E24C88061EEA2A1700DDFFB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E24C88911EEA392200DDFFB8 /* Mockifer.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Mockifer.mm; sourceTree = "<group>"; };
+		E2F256671F078B45008DADA5 /* civetweb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = civetweb.c; sourceTree = "<group>"; };
+		E2F256681F078B45008DADA5 /* civetweb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = civetweb.h; sourceTree = "<group>"; };
+		E2F256691F078B45008DADA5 /* handle_form.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = handle_form.inl; sourceTree = "<group>"; };
+		E2F2566A1F078B45008DADA5 /* md5.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = md5.inl; sourceTree = "<group>"; };
+		E2F2566C1F078B45008DADA5 /* duk_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_config.h; sourceTree = "<group>"; };
+		E2F2566D1F078B45008DADA5 /* duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duktape.c; sourceTree = "<group>"; };
+		E2F2566E1F078B45008DADA5 /* duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duktape.h; sourceTree = "<group>"; };
+		E2F256711F078B45008DADA5 /* json-forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "json-forwards.h"; sourceTree = "<group>"; };
+		E2F256721F078B45008DADA5 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		E2F256731F078B45008DADA5 /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsoncpp.cpp; sourceTree = "<group>"; };
+		E2F256741F078B45008DADA5 /* MockiferCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferCore.h; sourceTree = "<group>"; };
+		E2F256751F078B45008DADA5 /* MockiferRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferRequest.cpp; sourceTree = "<group>"; };
+		E2F256761F078B45008DADA5 /* MockiferRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferRequest.h; sourceTree = "<group>"; };
+		E2F256771F078B45008DADA5 /* MockiferResponse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferResponse.cpp; sourceTree = "<group>"; };
+		E2F256781F078B45008DADA5 /* MockiferResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferResponse.h; sourceTree = "<group>"; };
+		E2F256791F078B45008DADA5 /* MockiferRoute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferRoute.cpp; sourceTree = "<group>"; };
+		E2F2567A1F078B45008DADA5 /* MockiferRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferRoute.h; sourceTree = "<group>"; };
+		E2F2567B1F078B45008DADA5 /* MockiferRouteManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferRouteManager.cpp; sourceTree = "<group>"; };
+		E2F2567C1F078B45008DADA5 /* MockiferRouteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferRouteManager.h; sourceTree = "<group>"; };
+		E2F2567D1F078B45008DADA5 /* MockiferServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferServer.cpp; sourceTree = "<group>"; };
+		E2F2567E1F078B45008DADA5 /* MockiferServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferServer.h; sourceTree = "<group>"; };
+		E2F2567F1F078B45008DADA5 /* MockiferUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferUtil.cpp; sourceTree = "<group>"; };
+		E2F256801F078B45008DADA5 /* MockiferUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferUtil.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E24C87FE1EEA2A1700DDFFB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E24C87F81EEA2A1700DDFFB8 = {
+			isa = PBXGroup;
+			children = (
+				E24C88041EEA2A1700DDFFB8 /* Mockifer */,
+				E24C88031EEA2A1700DDFFB8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E24C88031EEA2A1700DDFFB8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E24C88021EEA2A1700DDFFB8 /* Mockifer.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E24C88041EEA2A1700DDFFB8 /* Mockifer */ = {
+			isa = PBXGroup;
+			children = (
+				E2F256651F078B45008DADA5 /* engine */,
+				E24C88061EEA2A1700DDFFB8 /* Info.plist */,
+				E24C88051EEA2A1700DDFFB8 /* Mockifer.h */,
+				E24C88911EEA392200DDFFB8 /* Mockifer.mm */,
+			);
+			path = Mockifer;
+			sourceTree = "<group>";
+		};
+		E2F256651F078B45008DADA5 /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				E2F256661F078B45008DADA5 /* civetweb */,
+				E2F2566B1F078B45008DADA5 /* duktape */,
+				E2F2566F1F078B45008DADA5 /* json */,
+				E2F256741F078B45008DADA5 /* MockiferCore.h */,
+				E2F256751F078B45008DADA5 /* MockiferRequest.cpp */,
+				E2F256761F078B45008DADA5 /* MockiferRequest.h */,
+				E2F256771F078B45008DADA5 /* MockiferResponse.cpp */,
+				E2F256781F078B45008DADA5 /* MockiferResponse.h */,
+				E2F256791F078B45008DADA5 /* MockiferRoute.cpp */,
+				E2F2567A1F078B45008DADA5 /* MockiferRoute.h */,
+				E2F2567B1F078B45008DADA5 /* MockiferRouteManager.cpp */,
+				E2F2567C1F078B45008DADA5 /* MockiferRouteManager.h */,
+				E2F2567D1F078B45008DADA5 /* MockiferServer.cpp */,
+				E2F2567E1F078B45008DADA5 /* MockiferServer.h */,
+				E2F2567F1F078B45008DADA5 /* MockiferUtil.cpp */,
+				E2F256801F078B45008DADA5 /* MockiferUtil.h */,
+			);
+			name = engine;
+			path = ../../engine;
+			sourceTree = "<group>";
+		};
+		E2F256661F078B45008DADA5 /* civetweb */ = {
+			isa = PBXGroup;
+			children = (
+				E2F256671F078B45008DADA5 /* civetweb.c */,
+				E2F256681F078B45008DADA5 /* civetweb.h */,
+				E2F256691F078B45008DADA5 /* handle_form.inl */,
+				E2F2566A1F078B45008DADA5 /* md5.inl */,
+			);
+			path = civetweb;
+			sourceTree = "<group>";
+		};
+		E2F2566B1F078B45008DADA5 /* duktape */ = {
+			isa = PBXGroup;
+			children = (
+				E2F2566C1F078B45008DADA5 /* duk_config.h */,
+				E2F2566D1F078B45008DADA5 /* duktape.c */,
+				E2F2566E1F078B45008DADA5 /* duktape.h */,
+			);
+			path = duktape;
+			sourceTree = "<group>";
+		};
+		E2F2566F1F078B45008DADA5 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				E2F256701F078B45008DADA5 /* json */,
+				E2F256731F078B45008DADA5 /* jsoncpp.cpp */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		E2F256701F078B45008DADA5 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				E2F256711F078B45008DADA5 /* json-forwards.h */,
+				E2F256721F078B45008DADA5 /* json.h */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E24C87FF1EEA2A1700DDFFB8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2F2568B1F078B45008DADA5 /* MockiferRequest.h in Headers */,
+				E2F256871F078B45008DADA5 /* json.h in Headers */,
+				E2F256861F078B45008DADA5 /* json-forwards.h in Headers */,
+				E2F2568D1F078B45008DADA5 /* MockiferResponse.h in Headers */,
+				E2F256911F078B45008DADA5 /* MockiferRouteManager.h in Headers */,
+				E2F256931F078B45008DADA5 /* MockiferServer.h in Headers */,
+				E2F256951F078B45008DADA5 /* MockiferUtil.h in Headers */,
+				E24C88071EEA2A1700DDFFB8 /* Mockifer.h in Headers */,
+				E2F256851F078B45008DADA5 /* duktape.h in Headers */,
+				E2F2568F1F078B45008DADA5 /* MockiferRoute.h in Headers */,
+				E2F256831F078B45008DADA5 /* duk_config.h in Headers */,
+				E2F256891F078B45008DADA5 /* MockiferCore.h in Headers */,
+				E2F256821F078B45008DADA5 /* civetweb.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		E24C88011EEA2A1700DDFFB8 /* Mockifer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E24C880A1EEA2A1700DDFFB8 /* Build configuration list for PBXNativeTarget "Mockifer" */;
+			buildPhases = (
+				E24C87FD1EEA2A1700DDFFB8 /* Sources */,
+				E24C87FE1EEA2A1700DDFFB8 /* Frameworks */,
+				E24C87FF1EEA2A1700DDFFB8 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Mockifer;
+			productName = Mockifer;
+			productReference = E24C88021EEA2A1700DDFFB8 /* Mockifer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E24C87F91EEA2A1700DDFFB8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = Mockifer;
+				TargetAttributes = {
+					E24C88011EEA2A1700DDFFB8 = {
+						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = E24C87FC1EEA2A1700DDFFB8 /* Build configuration list for PBXProject "Mockifer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E24C87F81EEA2A1700DDFFB8;
+			productRefGroup = E24C88031EEA2A1700DDFFB8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E24C88011EEA2A1700DDFFB8 /* Mockifer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E24C87FD1EEA2A1700DDFFB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2F256811F078B45008DADA5 /* civetweb.c in Sources */,
+				E2F256941F078B45008DADA5 /* MockiferUtil.cpp in Sources */,
+				E2F256881F078B45008DADA5 /* jsoncpp.cpp in Sources */,
+				E2F2568C1F078B45008DADA5 /* MockiferResponse.cpp in Sources */,
+				E2F256901F078B45008DADA5 /* MockiferRouteManager.cpp in Sources */,
+				E2F2568E1F078B45008DADA5 /* MockiferRoute.cpp in Sources */,
+				E2F256841F078B45008DADA5 /* duktape.c in Sources */,
+				E2F256921F078B45008DADA5 /* MockiferServer.cpp in Sources */,
+				E24C88931EEA392200DDFFB8 /* Mockifer.mm in Sources */,
+				E2F2568A1F078B45008DADA5 /* MockiferRequest.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		E24C88081EEA2A1700DDFFB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					i386,
+					x86_64,
+				);
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E24C88091EEA2A1700DDFFB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					i386,
+					x86_64,
+				);
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E24C880B1EEA2A1700DDFFB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				INFOPLIST_FILE = Mockifer/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LINKER_DISPLAYS_MANGLED_NAMES = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = mockifer.Mockifer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
+			};
+			name = Debug;
+		};
+		E24C880C1EEA2A1700DDFFB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				INFOPLIST_FILE = Mockifer/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LINKER_DISPLAYS_MANGLED_NAMES = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = mockifer.Mockifer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E24C87FC1EEA2A1700DDFFB8 /* Build configuration list for PBXProject "Mockifer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E24C88081EEA2A1700DDFFB8 /* Debug */,
+				E24C88091EEA2A1700DDFFB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E24C880A1EEA2A1700DDFFB8 /* Build configuration list for PBXNativeTarget "Mockifer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E24C880B1EEA2A1700DDFFB8 /* Debug */,
+				E24C880C1EEA2A1700DDFFB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E24C87F91EEA2A1700DDFFB8 /* Project object */;
+}

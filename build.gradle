@@ -1,0 +1,182 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task mockiferBuildJavascriptEngine {
+    group "Mockifer"
+    description "Build the mockifer-js component that generates the Kotlin Javascript application to be embedded. Typically used internally by other tasks."
+    dependsOn ":Source:js:build"
+
+    doLast {
+        // Update Console app
+        delete("./Products/console/mockifer-js")
+        copy {
+            includeEmptyDirs = true
+            from new File("./Products/js/mockifer-js")
+            into "./Products/console/mockifer-js"
+        }
+
+        // Update Android framework
+        delete("./Products/android/mockifer-js")
+        copy {
+            includeEmptyDirs = true
+            from new File("./Products/js/mockifer-js")
+            into "./Products/android/mockifer-js"
+        }
+
+        // Update Android sample app
+        delete("./Products/sample-android/app/src/main/assets/mockifer-js")
+        copy {
+            includeEmptyDirs = true
+            from new File("./Products/js/mockifer-js")
+            into "./Products/sample-android/app/src/main/assets/mockifer-js"
+        }
+
+        // Update iOS framework
+        delete("./Products/ios/mockifer-js")
+        copy {
+            includeEmptyDirs = true
+            from new File("./Products/js/mockifer-js")
+            into "./Products/ios/mockifer-js"
+        }
+
+        // Update iOS sample app
+        delete("./Products/sample-ios/MockiferSample/mockifer-js")
+        copy {
+            includeEmptyDirs = true
+            from new File("./Products/js/mockifer-js")
+            into "./Products/sample-ios/MockiferSample/mockifer-js"
+        }
+    }
+}
+
+task mockiferRunEditor {
+    group "Mockifer"
+    description "Compile the Javascript project if needed, then launch the editor application."
+
+    def appFile = file("./Products/editor/MockiferEditor.app")
+
+    if (appFile.exists()) {
+        dependsOn "mockiferBuildJavascriptEngine"
+    } else {
+        dependsOn "mockiferBuildEditor"
+    }
+
+    doLast {
+        exec {
+            workingDir './Products/editor'
+            commandLine 'sh', './start.sh'
+        }
+    }
+}
+
+task mockiferBuildMobileFrameworks() {
+    group "Mockifer"
+    description "Build both the iOS Framework and the Android Library along with the Mockifer engine."
+    dependsOn = ["mockiferBuildIOS", "mockiferBuildAndroid"]
+}
+
+task mockiferBuildIOS() {
+    group "Mockifer"
+    description "Build the iOS Framework with the embedded Javascript engine. The framework will be generated in the /Products/ios folder."
+    dependsOn = ["mockiferBuildJavascriptEngine"]
+
+    doLast {
+        exec {
+            workingDir './Source/ios'
+            commandLine './build.sh'
+        }
+
+        // Update mockifer-js in the iOS framework folder.
+        delete("./Products/ios/mockifer-js")
+        copy {
+            includeEmptyDirs = true
+            from new File("./Products/js/mockifer-js")
+            into "./Products/ios/mockifer-js"
+        }
+
+        // Update mockifer-js in the iOS example app.
+        delete("./Products/sample-ios/MockiferSample/mockifer-js")
+        copy {
+            includeEmptyDirs = true
+            from new File("./Products/js/mockifer-js")
+            into "./Products/sample-ios/MockiferSample/mockifer-js"
+        }
+    }
+}
+
+task mockiferBuildAndroid {
+    group "Mockifer"
+    description "Build the Android .AAR engine. The framework will be generated in the /Products/android folder."
+    dependsOn = ["mockiferBuildJavascriptEngine", ":Source:android:mockiferBuildFramework"]
+
+    doLast {
+        // Update mockifer-js in the Android framework folder.
+        delete("./Products/android/mockifer-js")
+        copy {
+            includeEmptyDirs = true
+            from new File("./Products/js/mockifer-js")
+            into "./Products/android/mockifer-js"
+        }
+
+        // Update mockifer-js in the Android example app.
+        delete("./Products/sample-android/app/src/main/assets/mockifer-js")
+        copy {
+            includeEmptyDirs = true
+            from new File("./Products/js/mockifer-js")
+            into "./Products/sample-android/app/src/main/assets/mockifer-js"
+        }
+    }
+}
+
+task mockiferBuildConsole {
+    group "Mockifer"
+    description "Build a console application that runs Mockifer via terminal. The application will be generated in the /Products/console folder."
+    dependsOn = ["mockiferBuildJavascriptEngine"]
+
+    doLast {
+        exec {
+            workingDir './Source/console'
+            commandLine './build.sh'
+        }
+    }
+}
+
+task mockiferBuildEditor {
+    group "Mockifer"
+    description "Build the editor app that can run Mockifer as a desktop application and perform maintenance tasks. The app will be generated in the /Products/editor folder."
+    dependsOn = ["mockiferBuildJavascriptEngine"]
+
+    doLast {
+        exec {
+            workingDir './Source/editor'
+            commandLine './build.sh'
+        }
+    }
+}
+
+task mockiferCleanProducts {
+    group "Mockifer"
+    description "Clears all generated product outputs in the /Products/* folders."
+    doLast {
+        delete("./Products/ios/Mockifer.framework")
+        delete("./Products/ios/mockifer-js")
+
+        delete("./Products/android/mockifer.aar")
+        delete("./Products/android/mockifer-js")
+
+        delete("./Products/js/mockifer-js")
+
+        delete("./Products/console/mockifer")
+        delete("./Products/console/mockifer-js")
+
+        delete("./Products/editor/MockiferEditor.app")
+
+        delete("./Products/sample-ios/Mockifer.framework")
+        delete("./Products/sample-ios/mockifer-js")
+
+        delete("./Products/sample-android/app/libs/mockifer.aar")
+    }
+}

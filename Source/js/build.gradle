@@ -1,0 +1,106 @@
+buildscript {
+    ext.kotlin_version = '1.1.3-2'
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+group 'mockifer'
+version '0.0.1'
+
+apply plugin: 'kotlin2js'
+
+def outputDir = 'out'
+def buildDir = 'build'
+def productDir = "${projectDir}/../../Products/js/mockifer-js"
+
+sourceSets {
+    main.kotlin.srcDirs += "src/main/kotlin"
+    test.kotlin.srcDirs += "src/test/kotlin"
+}
+
+compileKotlin2Js {
+    kotlinOptions.outputFile = "${projectDir}/${outputDir}/mockifer.js"
+    kotlinOptions.suppressWarnings = true
+    kotlinOptions.sourceMap = true
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
+}
+
+clean.doFirst() {
+    delete("${outputDir}")
+    delete("${buildDir}")
+    delete("${productDir}")
+}
+
+build.doFirst() {
+    delete("${productDir}")
+}
+
+build.doLast() {
+    configurations.compile.each { File file ->
+        copy {
+            includeEmptyDirs = false
+
+            from zipTree(file.absolutePath)
+            into "${projectDir}/${outputDir}"
+            include { fileTreeElement ->
+                def path = fileTreeElement.path
+                path.endsWith(".js") || (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
+            }
+        }
+    }
+
+    copy {
+        File artifact = new File("build/libs/${project.name}-${project.version}.jar")
+        includeEmptyDirs = false
+
+        from zipTree(artifact)
+        into "${outputDir}"
+        include { fileTreeElement ->
+            def path = fileTreeElement.path
+            !(path.startsWith("META-INF/") || path.startsWith("${project.name}"))
+        }
+    }
+
+    copy {
+        includeEmptyDirs = true
+        from new File("${outputDir}/mockifer/data")
+        into "${productDir}/data"
+    }
+
+    copy {
+        from new File("${outputDir}/mockifer/api.js")
+        into "${productDir}"
+    }
+
+    copy {
+        from new File("${outputDir}/mockifer/manifest.json")
+        into "${productDir}"
+    }
+
+    copy {
+        from new File("${outputDir}/mockifer/routes.json")
+        into "${productDir}"
+    }
+
+    copy {
+        from new File("${outputDir}/mockifer.js")
+        into "${productDir}"
+    }
+
+    copy {
+        from new File("${outputDir}/kotlin.js")
+        into "${productDir}"
+    }
+}

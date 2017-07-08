@@ -1,0 +1,24 @@
+{
+  "cats": [
+    {
+      "id": "id1",
+      "name": "Mocky cat 1",
+      "age": 8
+    },
+    {
+      "id": "id2",
+      "name": "Mocky cat 2",
+      "age": 7
+    },
+    {
+      "id": "id3",
+      "name": "Mocky cat 3",
+      "age": 9
+    },
+    {
+      "id": "id4",
+      "name": "Mocky cat 4",
+      "age": 6
+    }
+  ]
+}

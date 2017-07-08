@@ -1,0 +1,11 @@
+DerivedData
+bin
+build
+*.xcworkspace/
+*.xcuserdatad/
+obj
+local.properties
+.idea
+out
+.gradle
+*.iml

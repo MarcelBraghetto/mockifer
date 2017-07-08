@@ -1,0 +1,74 @@
+// Note: the Mockifer C++ source sets are configured via CMakeLists.txt.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:25.3.1'
+}
+
+def productDir = "${projectDir}/../../Products/android"
+def outputDir = "${projectDir}/build/outputs/aar"
+def sampleAppDir = "${productDir}/../sample-android/app/libs"
+
+task mockiferBuildFramework {
+    dependsOn = [":Source:android:cleanBuildCache", ":Source:android:assembleRelease"]
+
+    doLast {
+        // Update the Android framework product file itself.
+        delete("${productDir}/mockifer.aar")
+        copy {
+            from new File("${outputDir}/android-release.aar")
+            into "${productDir}"
+            rename { String fileName ->
+                fileName.replace('android-release.aar', 'mockifer.aar')
+            }
+        }
+
+        // Also bump the updated Android framework into the sample android app.
+        delete("${sampleAppDir}/mockifer.aar")
+        copy {
+            from new File("${productDir}/mockifer.aar")
+            into "${sampleAppDir}"
+        }
+    }
+}

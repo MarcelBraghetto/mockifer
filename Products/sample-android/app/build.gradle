@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "mockifer.example.android"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
+    compile(name: 'mockifer', ext: 'aar')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.2', {
+        exclude module: 'support-annotations'
+        exclude module: 'support-v4'
+        exclude module: 'support-v13'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'design'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+}
+
+// This task ensures that when ever we build the app we always grab the most up to date
+// version of the Mockifer content folder.
+task refreshMockiferContent {
+    doLast {
+        println 'do it before build'
+        delete("${projectDir}/src/main/assets/mockifer-js")
+        copy {
+            includeEmptyDirs = true
+            from new File("${projectDir}/../../js/mockifer-js")
+            into "${projectDir}/src/main/assets/mockifer-js"
+        }
+    }
+}
+
+preBuild.dependsOn refreshMockiferContent
