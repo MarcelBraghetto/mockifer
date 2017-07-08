@@ -26,13 +26,13 @@ Some of the key goals for the creation of **Mockifer** were:
 5. It must be easy to setup and configure rich request responses.
 6. It must be authored to be compatible with an *MIT licence* in its code and libraries that it uses so everyone can safely use and share it.
 
-###Why bother? - there are already other embeddable server options!
+### Why bother? - there are already other embeddable server options!
 
 There are many ways to create local web servers or mocking servers that run on the desktop or for specific platforms architectures, however there don't seem to be very many solutions that are truly embeddable and portable that can be **embedded** across **different platforms** produced from the **same code base**.
 
 The goal of this framework is to produce a cross platform library - primarily for iOS and Android (though compatible with other targets also), that behaves like a development or mock server, but that can be **packaged internally and completely self contained** inside a host application - write **once** and compile to **many**.
 
-###How does it work?
+### How does it work?
 
 At a glance, Mockifer is comprised of:
 
@@ -89,7 +89,7 @@ Mockifer was written with mobile applications in mind - therefore it requires a 
 
 By nature this pretty much means that you'll need to be working on a Mac. Mockifer could probably be adjusted to compile on Windows machines too but it's not something I'm interested in pursuing - feel free to fork this repo if you are so inclined!
 
-###Step 1: Install prerequisite tools
+### Step 1: Install prerequisite tools
 
 - Xcode along with developer provisioning. Mockifer was originally created using Xcode 8.
 - Xcode command line build tools which can be installed via:
@@ -102,7 +102,7 @@ xcode-select --install
 - Android Studio Kotlin plugin. [https://kotlinlang.org/docs/tutorials/kotlin-android.html](https://kotlinlang.org/docs/tutorials/kotlin-android.html). At the time of writing, Android Studio 3 had not yet been released but once it is released, the Kotlin plugin will not need to be manually installed.
 - Android NDK and CMake which can be installed via the Android SDK Manager via Android Studio: [https://developer.android.com/ndk/guides/index.html](https://developer.android.com/ndk/guides/index.html)
 
-###Step 2: Explore the project structure
+### Step 2: Explore the project structure
 
 The Mockifer folder structure is broken into two main sections; **Products** and **Source**.
 
@@ -133,7 +133,7 @@ Mockifer root directory
 
 ```
 
-###Step 3: Show all Mockifer Gradle tasks
+### Step 3: Show all Mockifer Gradle tasks
 
 The Mockifer project uses Gradle and a collection of shell scripts to orchestrate its build pipeline, though typically the **Mockifer Editor** MacOS application and the **Kotlin JS** project via **Android Studio** would be used to edit and build.
 
@@ -161,7 +161,7 @@ mockiferBuildMobileFrameworks - Build both the iOS Framework and the Android Lib
 
 ```
 
-###Step 4: Test drive the editor
+### Step 4: Test drive the editor
 
 To see Mockifer in action, lets start the desktop editor application. From the root project folder, enter the following Gradle command:
 
@@ -185,7 +185,7 @@ The editor is actually running Mockifer itself, so you can open your local web b
 
 <img src="Support/ReadMeAssets/browser01.png" />
 
-###Step 5: Test drive the sample apps
+### Step 5: Test drive the sample apps
 
 Video tutorial: [https://www.youtube.com/watch?v=lC5Hu0fw51s](https://www.youtube.com/watch?v=lC5Hu0fw51s)
 
@@ -286,7 +286,7 @@ Here is a table of the route fields that can be edited using the editor applicat
 | Controller Id | cats.getallcats | If defined, the route will invoke the Javascript application to handle the request, using the *controller id* as a key for mapping to an internal request controller. The embedded Javascript application is responsible for mapping a controller internally with the given controller id.|
 | Respond With JSON | { "name": "bob" } | If defined, forms a static *canned* response that will be delivered if the route is matched. Note that the response is saved into a JSON file with the same name as the route id in the */data/mocks* folder.|
 
-###'Pushing' mocks
+### 'Pushing' mocks
 
 One of the key features of Mockifer is the ability to create a set of dynamic routes that only become active if they are **pushed**. 
 
@@ -402,7 +402,7 @@ If you have *Postman* installed, import the file ```Support/Mockifer.postman_col
 
 Both iOS and Android share the same basic set of APIs, with some small language adjustments between the platforms.
 
-###Android
+### Android
 
 > Note: Mockifer itself will automatically start and stop once it is *installed* into an Android app, based on the application lifecycle callbacks and how many activities exist. If there are no known activities running within the application, Mockifer will shut itself down after a period of time.
 
@@ -418,7 +418,7 @@ Both iOS and Android share the same basic set of APIs, with some small language 
 | ```Mockifer.pushMock(... routeids)```| Enqueue a list of route ids, **once** each, into the active mocks list.|
 
 
-###iOS
+### iOS
 
 > Note: Unlike for Android, Mockifer in iOS is *manually* started and stopped, typically in the application delegate class.
 
@@ -435,3 +435,159 @@ For brevity, only the *Swift* methods are shown below, but the Mockifer framewor
 | ```Mockifer.pushMock(routeid)``` | Enqueue the route with the given route id **once** to the list of *active* mock routes to evaluate.|
 | ```Mockifer.pushMock(routeid, times)```| Same as ```pushMock``` but the route will be added ```times``` number of times into the active mocks list.|
 | ```Mockifer.pushMock([routeid])```| Enqueue an array of route ids, **once** each, into the active mocks list.|
+
+
+# Licence
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+***Start: Mockifer License***
+
+ MIT License
+
+Copyright (c) 2017 Marcel Braghetto
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+***End: Mockifer License***
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+***Start: Civetweb License***
+
+Copyright (c) 2013-2017 The CivetWeb developers ([CREDITS.md](https://github.com/civetweb/civetweb/blob/master/CREDITS.md))
+
+Copyright (c) 2004-2013 Sergey Lyubka
+
+Copyright (c) 2013 No Face Press, LLC (Thomas Davis)
+
+Copyright (c) 2013 F-Secure Corporation
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+***End: Civetweb License***
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+***Start: Duktape license***
+
+(http://opensource.org/licenses/MIT)
+
+Copyright (c) 2013-2017 by Duktape authors (see AUTHORS.rst)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+***End: Duktape license***
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+***Start: JSONCPP license***
+
+The JsonCpp library's source code, including accompanying documentation, 
+tests and demonstration applications, are licensed under the following
+conditions...
+
+The JsonCpp Authors explicitly disclaim copyright in all 
+jurisdictions which recognize such a disclaimer. In such jurisdictions, 
+this software is released into the Public Domain.
+
+In jurisdictions which do not recognize Public Domain property (e.g. Germany as of
+2010), this software is Copyright (c) 2007-2010 by The JsonCpp Authors, and is
+released under the terms of the MIT License (see below).
+
+In jurisdictions which recognize Public Domain property, the user of this 
+software may choose to accept it either as 1) Public Domain, 2) under the 
+conditions of the MIT License (see below), or 3) under the terms of dual 
+Public Domain/MIT License conditions described here, as they choose.
+
+The MIT License is about as close to Public Domain as a license can get, and is
+described in clear, concise terms at:
+
+   http://en.wikipedia.org/wiki/MIT_License
+   
+The full text of the MIT License follows:
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Copyright (c) 2007-2010 The JsonCpp Authors
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+(END LICENSE TEXT)
+
+The MIT license is compatible with both the GPL and commercial
+software, affording one all of the rights of Public Domain with the
+minor nuisance of being required to keep the above copyright notice
+and license text in the source code. Note also that by accepting the
+Public Domain "license" you can re-license your copy using whatever
+license you like.
+
+
+***End: JSONCPP license***
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
