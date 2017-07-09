@@ -242,6 +242,7 @@ class MainViewController : BaseViewController, NSTableViewDelegate, NSTextViewDe
             tableView.deselectAll(nil)
             Mockifer.reset()
             reloadRoutes()
+            startNewRoute()
             return
         }
         

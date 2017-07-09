@@ -7,6 +7,7 @@
 - [Getting started guide](#quick_start_guide)
 - [Dynamic routing system](#routing_system)
 - [Working with Mockifer](#working_with_mockifer)
+- [Core engine walkthrough](#core_engine)
 - [Mockifer API](#mockifer_api)
 
 <a name="introduction"></a>
@@ -395,6 +396,16 @@ If you have *Postman* installed, import the file ```Support/Mockifer.postman_col
 > Note that the Mockifer Postman samples point at port **8501** by default, which is what the *Mockifer Editor* runs on. Tweak the port number to **8504** in *Postman* if you want to connect to the console application.
 
 <img src="Support/ReadMeAssets/postman1.png" />
+
+<a name="mockifer_api"></a>
+--
+# Core engine walkthrough
+
+Watch the video below to learn about the core engine and how it works.
+
+Video tutorial: [https://www.youtube.com/watch?v=n9aJkoGPLIw](https://www.youtube.com/watch?v=n9aJkoGPLIw)
+
+[![Mockifer - getting started](https://img.youtube.com/vi/n9aJkoGPLIw/0.jpg)](https://www.youtube.com/watch?v=n9aJkoGPLIw)
 
 <a name="mockifer_api"></a>
 --

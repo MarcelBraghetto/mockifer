@@ -203,6 +203,10 @@ void MockiferServer::startServer() {
     
     LOGD("Starting HTTP server on port: %s", port.c_str());
     serverContext = mg_start(&serverCallbacks, NULL, options);
+    
+    if (serverContext == NULL) {
+        LOGE("FATAL: Unable to start listening on port %s! Check that nothing else is already using that port.", port.c_str());
+    }
 }
 
 string MockiferServer::getBaseUrl() {
