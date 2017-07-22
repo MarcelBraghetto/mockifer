@@ -68,15 +68,17 @@ private:
     duk_context *jsContext;
     bool serverOk;
     uint globalResponseDelay;
+    set<string> binaryResponseFileTypes;
     
     static int handleRequest(struct mg_connection *connection);
     
     MockiferServer(const string &contentPath, const string &port);
     ~MockiferServer();
+    bool isFileTypeRegistered(const string &fileType);
     void startServer();
     void resetServer();
     bool loadJavascriptFile(const string &fileName);
-    static MockiferResponse processRequest(const struct mg_request_info *requestInfo, string requestBody);
+    static MockiferResponse processRequest(MockiferRequest request);
 };
 
 NS_MOCKIFER_END

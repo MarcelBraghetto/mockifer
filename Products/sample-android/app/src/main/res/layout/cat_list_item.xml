@@ -1,27 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:padding="16dp"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    >
+
+    <ImageView
+        android:id="@+id/catImage"
+        android:layout_width="@dimen/cat_image_size"
+        android:layout_height="@dimen/cat_image_size"
+        android:layout_marginRight="16dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         >
 
-    <TextView
+        <TextView
             android:id="@+id/catId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
 
-    <TextView
+        <TextView
             android:id="@+id/catName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
 
-    <TextView
+        <TextView
             android:id="@+id/catAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
 
+    </LinearLayout>
 </LinearLayout>

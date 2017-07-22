@@ -76,9 +76,8 @@ bool MockiferUtil::deleteFile(const string &path) {
     return remove(path.c_str()) == 0;
 }
 
-vector<string> MockiferUtil::getBootstrapJavascriptFiles(const string &contentPath) {
-    vector<string> fileList;
-    
+MockiferManifest MockiferUtil::loadManifest(const string &contentPath) {
+    MockiferManifest manifest;
     auto manifestFilePath = contentPath + "/manifest.json";
     
     ifstream manifestFile { manifestFilePath };
@@ -92,7 +91,11 @@ vector<string> MockiferUtil::getBootstrapJavascriptFiles(const string &contentPa
         bool parsingSuccessful = reader.parse(jsonData, root);
         if (parsingSuccessful) {
             for (const auto &bootStrapElement : root.get("bootstrap_javascript", "[]")) {
-                fileList.push_back(bootStrapElement.asString());
+                manifest.javascriptBootstrapFiles.push_back(bootStrapElement.asString());
+            }
+
+            for (const auto &fileType : root.get("binary_response_file_types", "[]")) {
+                manifest.binaryResponseFileTypes.push_back(fileType.asString());
             }
         } else {
             LOGE("FATAL: Could not parse 'manifest.json'.");
@@ -101,7 +104,7 @@ vector<string> MockiferUtil::getBootstrapJavascriptFiles(const string &contentPa
         LOGE("FATAL: Could not find 'manifest.json'.");
     }
     
-    return fileList;
+    return manifest;
 }
 
 vector<string> MockiferUtil::split(const string &input, const char &delimiter) {
@@ -120,4 +123,15 @@ vector<string> MockiferUtil::split(const string &input, const char &delimiter) {
     }
     
     return tokens;
+}
+
+string MockiferUtil::toLowerCase(string source) {
+    auto result = source;
+    locale loc;
+    
+    for (auto i = 0; i < result.length(); i++) {
+        result[i] = tolower(result[i], loc);
+    }
+    
+    return result;
 }

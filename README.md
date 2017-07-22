@@ -266,6 +266,8 @@ Routes fall into roughly two categories:
 
 The idea is that the *internal* routes are what form the *foundation* of the server implementation and require no setup to be activated, whereas the *mock* routes must be activated to simulate conditions or scenarios - usually for automation testing where a repeatable state must be in place for each test run.
 
+> Note: The ```manifest.json``` file has a section labelled ```binary_response_file_types``` which specifies a list of file type suffixes that when found at the end of an incoming URI, should automatically route to become a file download - skipping the routing system.<br/><br/>For example: ```http:// .. /data/images/kitty1.png``` would result in the *kitty1.png* file being downloaded and returned. Add any other file type suffixes to the ```manifest.json``` to include other downloadable files.<br/><br/>The default manifest has some common file types that would typically result in a file download.
+
 Here is a table of the route fields that can be edited using the editor application:
 
 | Field        | Sample           | Description |

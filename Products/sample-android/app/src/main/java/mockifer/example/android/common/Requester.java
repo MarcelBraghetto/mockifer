@@ -7,6 +7,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class Requester {
+    public static final String BASE_URL = "http://localhost:8503";
     private static OkHttpClient client = new OkHttpClient();
 
     private Requester() {
@@ -21,7 +22,7 @@ public class Requester {
         }
 
         Request request = new Request.Builder()
-                .url("http://localhost:8503" + uri)
+                .url(BASE_URL + uri)
                 .method(method, requestBody)
                 .build();
 

@@ -1,11 +1,13 @@
 import Foundation
 
 class Requester {
+    static let BASE_URL = "http://localhost:8502"
+    
     static func load(method: String, uri: String, body: String?, callback: @escaping (Data?, URLResponse?, Error?) -> Void) {
         let session = URLSession(configuration: URLSession.shared.configuration, delegate:nil, delegateQueue:OperationQueue.main)
         let encodedUri = uri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         
-        var request = URLRequest(url: URL(string: "http://localhost:8502" + encodedUri)!)
+        var request = URLRequest(url: URL(string: BASE_URL + encodedUri)!)
         request.httpMethod = method
         
         if let body = body {

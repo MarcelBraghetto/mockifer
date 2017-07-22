@@ -8,4 +8,5 @@ public class Cat implements Serializable {
     @SerializedName("id") public String id;
     @SerializedName("name") public String name;
     @SerializedName("age") public int age;
+    @SerializedName("image") public String image;
 }

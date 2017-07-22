@@ -1,6 +1,5 @@
 package mockifer.example.android.edit;
 
-import com.google.gson.Gson;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +9,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.io.IOException;
+
 import mockifer.example.android.R;
 import mockifer.example.android.cats.Cat;
 import mockifer.example.android.common.Requester;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-
-import java.io.IOException;
 
 public class EditCatActivity extends AppCompatActivity {
     public static final String EXTRA_CAT = "cat";
@@ -89,6 +90,7 @@ public class EditCatActivity extends AppCompatActivity {
         catToSave.id = cat.id;
         catToSave.name = catNameEditText.getText().toString();
         catToSave.age = Integer.valueOf(catAgeEditText.getText().toString());
+        catToSave.image = cat.image;
 
         Requester.doRequest("PUT", "/cats", new Gson().toJson(catToSave), new Callback() {
             @Override public void onFailure(Call call, IOException e) {

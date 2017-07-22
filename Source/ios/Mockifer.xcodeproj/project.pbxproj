@@ -7,59 +7,63 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3858D3C61F23020800DAA1D3 /* civetweb.c in Sources */ = {isa = PBXBuildFile; fileRef = 3858D3AA1F23020800DAA1D3 /* civetweb.c */; };
+		3858D3C71F23020800DAA1D3 /* civetweb.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3AB1F23020800DAA1D3 /* civetweb.h */; };
+		3858D3C81F23020800DAA1D3 /* duk_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3AF1F23020800DAA1D3 /* duk_config.h */; };
+		3858D3C91F23020800DAA1D3 /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 3858D3B01F23020800DAA1D3 /* duktape.c */; };
+		3858D3CA1F23020800DAA1D3 /* duktape.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3B11F23020800DAA1D3 /* duktape.h */; };
+		3858D3CB1F23020800DAA1D3 /* json-forwards.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3B41F23020800DAA1D3 /* json-forwards.h */; };
+		3858D3CC1F23020800DAA1D3 /* json.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3B51F23020800DAA1D3 /* json.h */; };
+		3858D3CD1F23020800DAA1D3 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3858D3B61F23020800DAA1D3 /* jsoncpp.cpp */; };
+		3858D3CE1F23020800DAA1D3 /* MockiferCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3B71F23020800DAA1D3 /* MockiferCore.h */; };
+		3858D3CF1F23020800DAA1D3 /* MockiferManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3858D3B81F23020800DAA1D3 /* MockiferManifest.cpp */; };
+		3858D3D01F23020800DAA1D3 /* MockiferManifest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3B91F23020800DAA1D3 /* MockiferManifest.h */; };
+		3858D3D11F23020800DAA1D3 /* MockiferRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3858D3BA1F23020800DAA1D3 /* MockiferRequest.cpp */; };
+		3858D3D21F23020800DAA1D3 /* MockiferRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3BB1F23020800DAA1D3 /* MockiferRequest.h */; };
+		3858D3D31F23020800DAA1D3 /* MockiferResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3858D3BC1F23020800DAA1D3 /* MockiferResponse.cpp */; };
+		3858D3D41F23020800DAA1D3 /* MockiferResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3BD1F23020800DAA1D3 /* MockiferResponse.h */; };
+		3858D3D51F23020800DAA1D3 /* MockiferRoute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3858D3BE1F23020800DAA1D3 /* MockiferRoute.cpp */; };
+		3858D3D61F23020800DAA1D3 /* MockiferRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3BF1F23020800DAA1D3 /* MockiferRoute.h */; };
+		3858D3D71F23020800DAA1D3 /* MockiferRouteManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3858D3C01F23020800DAA1D3 /* MockiferRouteManager.cpp */; };
+		3858D3D81F23020800DAA1D3 /* MockiferRouteManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3C11F23020800DAA1D3 /* MockiferRouteManager.h */; };
+		3858D3D91F23020800DAA1D3 /* MockiferServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3858D3C21F23020800DAA1D3 /* MockiferServer.cpp */; };
+		3858D3DA1F23020800DAA1D3 /* MockiferServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3C31F23020800DAA1D3 /* MockiferServer.h */; };
+		3858D3DB1F23020800DAA1D3 /* MockiferUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3858D3C41F23020800DAA1D3 /* MockiferUtil.cpp */; };
+		3858D3DC1F23020800DAA1D3 /* MockiferUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 3858D3C51F23020800DAA1D3 /* MockiferUtil.h */; };
 		E24C88071EEA2A1700DDFFB8 /* Mockifer.h in Headers */ = {isa = PBXBuildFile; fileRef = E24C88051EEA2A1700DDFFB8 /* Mockifer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E24C88931EEA392200DDFFB8 /* Mockifer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E24C88911EEA392200DDFFB8 /* Mockifer.mm */; };
-		E2F256811F078B45008DADA5 /* civetweb.c in Sources */ = {isa = PBXBuildFile; fileRef = E2F256671F078B45008DADA5 /* civetweb.c */; };
-		E2F256821F078B45008DADA5 /* civetweb.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256681F078B45008DADA5 /* civetweb.h */; };
-		E2F256831F078B45008DADA5 /* duk_config.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F2566C1F078B45008DADA5 /* duk_config.h */; };
-		E2F256841F078B45008DADA5 /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = E2F2566D1F078B45008DADA5 /* duktape.c */; };
-		E2F256851F078B45008DADA5 /* duktape.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F2566E1F078B45008DADA5 /* duktape.h */; };
-		E2F256861F078B45008DADA5 /* json-forwards.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256711F078B45008DADA5 /* json-forwards.h */; };
-		E2F256871F078B45008DADA5 /* json.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256721F078B45008DADA5 /* json.h */; };
-		E2F256881F078B45008DADA5 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F256731F078B45008DADA5 /* jsoncpp.cpp */; };
-		E2F256891F078B45008DADA5 /* MockiferCore.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256741F078B45008DADA5 /* MockiferCore.h */; };
-		E2F2568A1F078B45008DADA5 /* MockiferRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F256751F078B45008DADA5 /* MockiferRequest.cpp */; };
-		E2F2568B1F078B45008DADA5 /* MockiferRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256761F078B45008DADA5 /* MockiferRequest.h */; };
-		E2F2568C1F078B45008DADA5 /* MockiferResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F256771F078B45008DADA5 /* MockiferResponse.cpp */; };
-		E2F2568D1F078B45008DADA5 /* MockiferResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256781F078B45008DADA5 /* MockiferResponse.h */; };
-		E2F2568E1F078B45008DADA5 /* MockiferRoute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F256791F078B45008DADA5 /* MockiferRoute.cpp */; };
-		E2F2568F1F078B45008DADA5 /* MockiferRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F2567A1F078B45008DADA5 /* MockiferRoute.h */; };
-		E2F256901F078B45008DADA5 /* MockiferRouteManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F2567B1F078B45008DADA5 /* MockiferRouteManager.cpp */; };
-		E2F256911F078B45008DADA5 /* MockiferRouteManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F2567C1F078B45008DADA5 /* MockiferRouteManager.h */; };
-		E2F256921F078B45008DADA5 /* MockiferServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F2567D1F078B45008DADA5 /* MockiferServer.cpp */; };
-		E2F256931F078B45008DADA5 /* MockiferServer.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F2567E1F078B45008DADA5 /* MockiferServer.h */; };
-		E2F256941F078B45008DADA5 /* MockiferUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F2567F1F078B45008DADA5 /* MockiferUtil.cpp */; };
-		E2F256951F078B45008DADA5 /* MockiferUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = E2F256801F078B45008DADA5 /* MockiferUtil.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3858D3AA1F23020800DAA1D3 /* civetweb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = civetweb.c; sourceTree = "<group>"; };
+		3858D3AB1F23020800DAA1D3 /* civetweb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = civetweb.h; sourceTree = "<group>"; };
+		3858D3AC1F23020800DAA1D3 /* handle_form.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = handle_form.inl; sourceTree = "<group>"; };
+		3858D3AD1F23020800DAA1D3 /* md5.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = md5.inl; sourceTree = "<group>"; };
+		3858D3AF1F23020800DAA1D3 /* duk_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_config.h; sourceTree = "<group>"; };
+		3858D3B01F23020800DAA1D3 /* duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duktape.c; sourceTree = "<group>"; };
+		3858D3B11F23020800DAA1D3 /* duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duktape.h; sourceTree = "<group>"; };
+		3858D3B41F23020800DAA1D3 /* json-forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "json-forwards.h"; sourceTree = "<group>"; };
+		3858D3B51F23020800DAA1D3 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		3858D3B61F23020800DAA1D3 /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsoncpp.cpp; sourceTree = "<group>"; };
+		3858D3B71F23020800DAA1D3 /* MockiferCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferCore.h; sourceTree = "<group>"; };
+		3858D3B81F23020800DAA1D3 /* MockiferManifest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferManifest.cpp; sourceTree = "<group>"; };
+		3858D3B91F23020800DAA1D3 /* MockiferManifest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferManifest.h; sourceTree = "<group>"; };
+		3858D3BA1F23020800DAA1D3 /* MockiferRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferRequest.cpp; sourceTree = "<group>"; };
+		3858D3BB1F23020800DAA1D3 /* MockiferRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferRequest.h; sourceTree = "<group>"; };
+		3858D3BC1F23020800DAA1D3 /* MockiferResponse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferResponse.cpp; sourceTree = "<group>"; };
+		3858D3BD1F23020800DAA1D3 /* MockiferResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferResponse.h; sourceTree = "<group>"; };
+		3858D3BE1F23020800DAA1D3 /* MockiferRoute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferRoute.cpp; sourceTree = "<group>"; };
+		3858D3BF1F23020800DAA1D3 /* MockiferRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferRoute.h; sourceTree = "<group>"; };
+		3858D3C01F23020800DAA1D3 /* MockiferRouteManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferRouteManager.cpp; sourceTree = "<group>"; };
+		3858D3C11F23020800DAA1D3 /* MockiferRouteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferRouteManager.h; sourceTree = "<group>"; };
+		3858D3C21F23020800DAA1D3 /* MockiferServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferServer.cpp; sourceTree = "<group>"; };
+		3858D3C31F23020800DAA1D3 /* MockiferServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferServer.h; sourceTree = "<group>"; };
+		3858D3C41F23020800DAA1D3 /* MockiferUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferUtil.cpp; sourceTree = "<group>"; };
+		3858D3C51F23020800DAA1D3 /* MockiferUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferUtil.h; sourceTree = "<group>"; };
 		E24C88021EEA2A1700DDFFB8 /* Mockifer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mockifer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E24C88051EEA2A1700DDFFB8 /* Mockifer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mockifer.h; sourceTree = "<group>"; };
 		E24C88061EEA2A1700DDFFB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E24C88911EEA392200DDFFB8 /* Mockifer.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Mockifer.mm; sourceTree = "<group>"; };
-		E2F256671F078B45008DADA5 /* civetweb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = civetweb.c; sourceTree = "<group>"; };
-		E2F256681F078B45008DADA5 /* civetweb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = civetweb.h; sourceTree = "<group>"; };
-		E2F256691F078B45008DADA5 /* handle_form.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = handle_form.inl; sourceTree = "<group>"; };
-		E2F2566A1F078B45008DADA5 /* md5.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = md5.inl; sourceTree = "<group>"; };
-		E2F2566C1F078B45008DADA5 /* duk_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_config.h; sourceTree = "<group>"; };
-		E2F2566D1F078B45008DADA5 /* duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duktape.c; sourceTree = "<group>"; };
-		E2F2566E1F078B45008DADA5 /* duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duktape.h; sourceTree = "<group>"; };
-		E2F256711F078B45008DADA5 /* json-forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "json-forwards.h"; sourceTree = "<group>"; };
-		E2F256721F078B45008DADA5 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
-		E2F256731F078B45008DADA5 /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsoncpp.cpp; sourceTree = "<group>"; };
-		E2F256741F078B45008DADA5 /* MockiferCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferCore.h; sourceTree = "<group>"; };
-		E2F256751F078B45008DADA5 /* MockiferRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferRequest.cpp; sourceTree = "<group>"; };
-		E2F256761F078B45008DADA5 /* MockiferRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferRequest.h; sourceTree = "<group>"; };
-		E2F256771F078B45008DADA5 /* MockiferResponse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferResponse.cpp; sourceTree = "<group>"; };
-		E2F256781F078B45008DADA5 /* MockiferResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferResponse.h; sourceTree = "<group>"; };
-		E2F256791F078B45008DADA5 /* MockiferRoute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferRoute.cpp; sourceTree = "<group>"; };
-		E2F2567A1F078B45008DADA5 /* MockiferRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferRoute.h; sourceTree = "<group>"; };
-		E2F2567B1F078B45008DADA5 /* MockiferRouteManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferRouteManager.cpp; sourceTree = "<group>"; };
-		E2F2567C1F078B45008DADA5 /* MockiferRouteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferRouteManager.h; sourceTree = "<group>"; };
-		E2F2567D1F078B45008DADA5 /* MockiferServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferServer.cpp; sourceTree = "<group>"; };
-		E2F2567E1F078B45008DADA5 /* MockiferServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferServer.h; sourceTree = "<group>"; };
-		E2F2567F1F078B45008DADA5 /* MockiferUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferUtil.cpp; sourceTree = "<group>"; };
-		E2F256801F078B45008DADA5 /* MockiferUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferUtil.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3858D3A81F23020800DAA1D3 /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				3858D3A91F23020800DAA1D3 /* civetweb */,
+				3858D3AE1F23020800DAA1D3 /* duktape */,
+				3858D3B21F23020800DAA1D3 /* json */,
+				3858D3B71F23020800DAA1D3 /* MockiferCore.h */,
+				3858D3B81F23020800DAA1D3 /* MockiferManifest.cpp */,
+				3858D3B91F23020800DAA1D3 /* MockiferManifest.h */,
+				3858D3BA1F23020800DAA1D3 /* MockiferRequest.cpp */,
+				3858D3BB1F23020800DAA1D3 /* MockiferRequest.h */,
+				3858D3BC1F23020800DAA1D3 /* MockiferResponse.cpp */,
+				3858D3BD1F23020800DAA1D3 /* MockiferResponse.h */,
+				3858D3BE1F23020800DAA1D3 /* MockiferRoute.cpp */,
+				3858D3BF1F23020800DAA1D3 /* MockiferRoute.h */,
+				3858D3C01F23020800DAA1D3 /* MockiferRouteManager.cpp */,
+				3858D3C11F23020800DAA1D3 /* MockiferRouteManager.h */,
+				3858D3C21F23020800DAA1D3 /* MockiferServer.cpp */,
+				3858D3C31F23020800DAA1D3 /* MockiferServer.h */,
+				3858D3C41F23020800DAA1D3 /* MockiferUtil.cpp */,
+				3858D3C51F23020800DAA1D3 /* MockiferUtil.h */,
+			);
+			name = engine;
+			path = ../../engine;
+			sourceTree = "<group>";
+		};
+		3858D3A91F23020800DAA1D3 /* civetweb */ = {
+			isa = PBXGroup;
+			children = (
+				3858D3AA1F23020800DAA1D3 /* civetweb.c */,
+				3858D3AB1F23020800DAA1D3 /* civetweb.h */,
+				3858D3AC1F23020800DAA1D3 /* handle_form.inl */,
+				3858D3AD1F23020800DAA1D3 /* md5.inl */,
+			);
+			path = civetweb;
+			sourceTree = "<group>";
+		};
+		3858D3AE1F23020800DAA1D3 /* duktape */ = {
+			isa = PBXGroup;
+			children = (
+				3858D3AF1F23020800DAA1D3 /* duk_config.h */,
+				3858D3B01F23020800DAA1D3 /* duktape.c */,
+				3858D3B11F23020800DAA1D3 /* duktape.h */,
+			);
+			path = duktape;
+			sourceTree = "<group>";
+		};
+		3858D3B21F23020800DAA1D3 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				3858D3B31F23020800DAA1D3 /* json */,
+				3858D3B61F23020800DAA1D3 /* jsoncpp.cpp */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		3858D3B31F23020800DAA1D3 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				3858D3B41F23020800DAA1D3 /* json-forwards.h */,
+				3858D3B51F23020800DAA1D3 /* json.h */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
 		E24C87F81EEA2A1700DDFFB8 = {
 			isa = PBXGroup;
 			children = (
@@ -92,75 +161,12 @@
 		E24C88041EEA2A1700DDFFB8 /* Mockifer */ = {
 			isa = PBXGroup;
 			children = (
-				E2F256651F078B45008DADA5 /* engine */,
+				3858D3A81F23020800DAA1D3 /* engine */,
 				E24C88061EEA2A1700DDFFB8 /* Info.plist */,
 				E24C88051EEA2A1700DDFFB8 /* Mockifer.h */,
 				E24C88911EEA392200DDFFB8 /* Mockifer.mm */,
 			);
 			path = Mockifer;
-			sourceTree = "<group>";
-		};
-		E2F256651F078B45008DADA5 /* engine */ = {
-			isa = PBXGroup;
-			children = (
-				E2F256661F078B45008DADA5 /* civetweb */,
-				E2F2566B1F078B45008DADA5 /* duktape */,
-				E2F2566F1F078B45008DADA5 /* json */,
-				E2F256741F078B45008DADA5 /* MockiferCore.h */,
-				E2F256751F078B45008DADA5 /* MockiferRequest.cpp */,
-				E2F256761F078B45008DADA5 /* MockiferRequest.h */,
-				E2F256771F078B45008DADA5 /* MockiferResponse.cpp */,
-				E2F256781F078B45008DADA5 /* MockiferResponse.h */,
-				E2F256791F078B45008DADA5 /* MockiferRoute.cpp */,
-				E2F2567A1F078B45008DADA5 /* MockiferRoute.h */,
-				E2F2567B1F078B45008DADA5 /* MockiferRouteManager.cpp */,
-				E2F2567C1F078B45008DADA5 /* MockiferRouteManager.h */,
-				E2F2567D1F078B45008DADA5 /* MockiferServer.cpp */,
-				E2F2567E1F078B45008DADA5 /* MockiferServer.h */,
-				E2F2567F1F078B45008DADA5 /* MockiferUtil.cpp */,
-				E2F256801F078B45008DADA5 /* MockiferUtil.h */,
-			);
-			name = engine;
-			path = ../../engine;
-			sourceTree = "<group>";
-		};
-		E2F256661F078B45008DADA5 /* civetweb */ = {
-			isa = PBXGroup;
-			children = (
-				E2F256671F078B45008DADA5 /* civetweb.c */,
-				E2F256681F078B45008DADA5 /* civetweb.h */,
-				E2F256691F078B45008DADA5 /* handle_form.inl */,
-				E2F2566A1F078B45008DADA5 /* md5.inl */,
-			);
-			path = civetweb;
-			sourceTree = "<group>";
-		};
-		E2F2566B1F078B45008DADA5 /* duktape */ = {
-			isa = PBXGroup;
-			children = (
-				E2F2566C1F078B45008DADA5 /* duk_config.h */,
-				E2F2566D1F078B45008DADA5 /* duktape.c */,
-				E2F2566E1F078B45008DADA5 /* duktape.h */,
-			);
-			path = duktape;
-			sourceTree = "<group>";
-		};
-		E2F2566F1F078B45008DADA5 /* json */ = {
-			isa = PBXGroup;
-			children = (
-				E2F256701F078B45008DADA5 /* json */,
-				E2F256731F078B45008DADA5 /* jsoncpp.cpp */,
-			);
-			path = json;
-			sourceTree = "<group>";
-		};
-		E2F256701F078B45008DADA5 /* json */ = {
-			isa = PBXGroup;
-			children = (
-				E2F256711F078B45008DADA5 /* json-forwards.h */,
-				E2F256721F078B45008DADA5 /* json.h */,
-			);
-			path = json;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,19 +176,20 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2F2568B1F078B45008DADA5 /* MockiferRequest.h in Headers */,
-				E2F256871F078B45008DADA5 /* json.h in Headers */,
-				E2F256861F078B45008DADA5 /* json-forwards.h in Headers */,
-				E2F2568D1F078B45008DADA5 /* MockiferResponse.h in Headers */,
-				E2F256911F078B45008DADA5 /* MockiferRouteManager.h in Headers */,
-				E2F256931F078B45008DADA5 /* MockiferServer.h in Headers */,
-				E2F256951F078B45008DADA5 /* MockiferUtil.h in Headers */,
+				3858D3CC1F23020800DAA1D3 /* json.h in Headers */,
+				3858D3CB1F23020800DAA1D3 /* json-forwards.h in Headers */,
+				3858D3D61F23020800DAA1D3 /* MockiferRoute.h in Headers */,
+				3858D3D21F23020800DAA1D3 /* MockiferRequest.h in Headers */,
+				3858D3D41F23020800DAA1D3 /* MockiferResponse.h in Headers */,
 				E24C88071EEA2A1700DDFFB8 /* Mockifer.h in Headers */,
-				E2F256851F078B45008DADA5 /* duktape.h in Headers */,
-				E2F2568F1F078B45008DADA5 /* MockiferRoute.h in Headers */,
-				E2F256831F078B45008DADA5 /* duk_config.h in Headers */,
-				E2F256891F078B45008DADA5 /* MockiferCore.h in Headers */,
-				E2F256821F078B45008DADA5 /* civetweb.h in Headers */,
+				3858D3DC1F23020800DAA1D3 /* MockiferUtil.h in Headers */,
+				3858D3D81F23020800DAA1D3 /* MockiferRouteManager.h in Headers */,
+				3858D3CA1F23020800DAA1D3 /* duktape.h in Headers */,
+				3858D3C81F23020800DAA1D3 /* duk_config.h in Headers */,
+				3858D3CE1F23020800DAA1D3 /* MockiferCore.h in Headers */,
+				3858D3DA1F23020800DAA1D3 /* MockiferServer.h in Headers */,
+				3858D3C71F23020800DAA1D3 /* civetweb.h in Headers */,
+				3858D3D01F23020800DAA1D3 /* MockiferManifest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,16 +251,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2F256811F078B45008DADA5 /* civetweb.c in Sources */,
-				E2F256941F078B45008DADA5 /* MockiferUtil.cpp in Sources */,
-				E2F256881F078B45008DADA5 /* jsoncpp.cpp in Sources */,
-				E2F2568C1F078B45008DADA5 /* MockiferResponse.cpp in Sources */,
-				E2F256901F078B45008DADA5 /* MockiferRouteManager.cpp in Sources */,
-				E2F2568E1F078B45008DADA5 /* MockiferRoute.cpp in Sources */,
-				E2F256841F078B45008DADA5 /* duktape.c in Sources */,
-				E2F256921F078B45008DADA5 /* MockiferServer.cpp in Sources */,
+				3858D3C61F23020800DAA1D3 /* civetweb.c in Sources */,
+				3858D3D51F23020800DAA1D3 /* MockiferRoute.cpp in Sources */,
+				3858D3D91F23020800DAA1D3 /* MockiferServer.cpp in Sources */,
+				3858D3CD1F23020800DAA1D3 /* jsoncpp.cpp in Sources */,
+				3858D3D71F23020800DAA1D3 /* MockiferRouteManager.cpp in Sources */,
+				3858D3C91F23020800DAA1D3 /* duktape.c in Sources */,
+				3858D3D11F23020800DAA1D3 /* MockiferRequest.cpp in Sources */,
+				3858D3CF1F23020800DAA1D3 /* MockiferManifest.cpp in Sources */,
+				3858D3DB1F23020800DAA1D3 /* MockiferUtil.cpp in Sources */,
 				E24C88931EEA392200DDFFB8 /* Mockifer.mm in Sources */,
-				E2F2568A1F078B45008DADA5 /* MockiferRequest.cpp in Sources */,
+				3858D3D31F23020800DAA1D3 /* MockiferResponse.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

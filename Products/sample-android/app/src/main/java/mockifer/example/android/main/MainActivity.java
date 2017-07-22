@@ -1,8 +1,5 @@
 package mockifer.example.android.main;
 
-import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
-
-import com.google.gson.Gson;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 import mockifer.Mockifer;
 import mockifer.example.android.R;
@@ -26,7 +29,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-import java.io.IOException;
+import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 
 public class MainActivity extends AppCompatActivity {
     Button resetButton;
@@ -129,12 +132,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
+            private ImageView catImageView;
             private TextView catIdTextView;
             private TextView catNameTextView;
             private TextView catAgeTextView;
 
-            public ViewHolder(View itemView) {
+            ViewHolder(View itemView) {
                 super(itemView);
+                catImageView = (ImageView) itemView.findViewById(R.id.catImage);
                 catIdTextView = (TextView) itemView.findViewById(R.id.catId);
                 catNameTextView = (TextView) itemView.findViewById(R.id.catName);
                 catAgeTextView = (TextView) itemView.findViewById(R.id.catAge);
@@ -147,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             void bind(Cat cat) {
+                Picasso.with(itemView.getContext()).load(Requester.BASE_URL + cat.image).into(catImageView);
                 catIdTextView.setText("Id:     " + cat.id);
                 catNameTextView.setText("Name: " + cat.name);
                 catAgeTextView.setText("Age:   " + cat.age);

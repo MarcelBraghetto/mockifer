@@ -38,7 +38,6 @@ USING_NS_MOCKIFER;
 using namespace std::chrono;
 typedef std::chrono::high_resolution_clock Time;
 
-static mutex requestMutex;
 static MockiferServer* sServer = nullptr;
 
 static string LINE_BREAK = "\r\n";
@@ -176,17 +175,23 @@ void MockiferServer::startServer() {
     duk_put_prop_string(jsContext, -2 /* -2 = global*/, "duktape_getActiveMocks");
     duk_pop(jsContext);
     
-    // Load the list of javascript files that need to bootstrap to start the server.
-    auto bootstrapJavascriptFiles = MockiferUtil::getBootstrapJavascriptFiles(contentPath);
+    // Load the manifest
+    auto manifest = MockiferUtil::loadManifest(contentPath);
     
-    if (bootstrapJavascriptFiles.size() == 0) {
+    // Load the list of javascript files that need to bootstrap to start the server.
+    if (manifest.javascriptBootstrapFiles.size() == 0) {
         serverOk = false;
     }
     
-    for (const auto &javascriptFileName : bootstrapJavascriptFiles) {
+    for (const auto &javascriptFileName : manifest.javascriptBootstrapFiles) {
         if(!loadJavascriptFile(javascriptFileName)) {
             serverOk = false;
         }
+    }
+    
+    // Load and register any binary file type suffixes to resolve for requests.
+    for (const auto &fileType : manifest.binaryResponseFileTypes) {
+        binaryResponseFileTypes.insert(fileType);
     }
     
     // Start the CivitWeb server - we deliberately limit the number of worker threads
@@ -246,6 +251,10 @@ bool MockiferServer::loadJavascriptFile(const string &fileName) {
     return false;
 }
 
+bool MockiferServer::isFileTypeRegistered(const string &fileType) {
+    return binaryResponseFileTypes.find(fileType) != binaryResponseFileTypes.end();
+}
+
 int MockiferServer::handleRequest(struct mg_connection *connection) {
     if (!sServer || !sServer->serverOk) {
         LOGE("MockiferServer::handleRequest: server is unavailable before processing request.");
@@ -264,7 +273,30 @@ int MockiferServer::handleRequest(struct mg_connection *connection) {
         requestBody = string(buf);
     }
     
-    auto response = processRequest(requestInfo, requestBody);
+    // Parse the request into a request object
+    MockiferRequest request {requestInfo, requestBody};
+    
+    LOGD("Request: [%s] %s", request.requestMethod.c_str(), request.requestUri.c_str());
+    
+    // Check if this request is asking for a file whose extension is known to us.
+    auto uri = MockiferUtil::toLowerCase(request.requestUri);
+    auto fileSuffixIndex = uri.find_last_of(".");
+    if (fileSuffixIndex != string::npos) {
+        auto fileSuffix = uri.substr(fileSuffixIndex, uri.length());
+        
+        // See if its a suffix we recognise as a 'file' response.
+        if (sServer->isFileTypeRegistered(fileSuffix)) {
+            auto filePath = sServer->contentPath + requestInfo->local_uri;
+            mg_send_file(connection, filePath.c_str());
+            
+            auto elapsed = duration_cast<milliseconds>(Time::now() - timeBefore);
+            LOGD(" ↳ Responded in %ld ms with binary file %s", (long) elapsed.count(), requestInfo->local_uri);
+            
+            return 1;
+        }
+    }
+    
+    auto response = processRequest(request);
     
     if (!sServer || !sServer->serverOk) {
         LOGE("MockiferServer::handleRequest: server is unavailable after processing request.");
@@ -298,17 +330,13 @@ int MockiferServer::handleRequest(struct mg_connection *connection) {
     return 1; // returning 1 indicates we have sent everything to the client.
 }
 
-MockiferResponse MockiferServer::processRequest(const struct mg_request_info *requestInfo, string requestBody) {
+MockiferResponse MockiferServer::processRequest(MockiferRequest request) {
     auto context = sServer->jsContext;
-    
-    // Parse the request into a request object
-    MockiferRequest request {requestInfo, requestBody};
     
     // Attempt to find a matching route that can handle the request
     auto route = sServer->routesManager->findMatchingRoute(request);
     
     auto requestDto = request.createDto();
-    LOGD("Request: [%s] %s", request.requestMethod.c_str(), request.requestUri.c_str());
 
     duk_get_global_string(context, "mockifer_handleServerRequest");
     duk_push_string(context, requestDto.c_str());

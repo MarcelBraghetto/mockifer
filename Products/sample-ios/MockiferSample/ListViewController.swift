@@ -5,6 +5,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var tableView: UITableView!
     
     private var cats = [CatDto]()
+    private var imageCache: [String: UIImage] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +100,26 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.textLabel?.text = "\(cat.name)"
         cell.detailTextLabel?.text = "Id: \(cat.id), Age: \(cat.age)"
         
+        cell.imageView?.image = imageCache[cat.image]
+        
+        if (cell.imageView?.image == nil) {
+            Requester.load(method: "GET", uri: cat.image, body: nil) { (data, response, error) in
+                // This code is pretty basic, probably needs some resilience to cell reuse, but good enough for this demo app.
+                if error == nil, let targetCell = tableView.cellForRow(at: indexPath), let data = data {
+                    let imageData = UIImage(data: data)
+                    self.imageCache[cat.image] = imageData
+                    targetCell.imageView?.image = imageData
+                    tableView.reloadRows(at: [indexPath], with: .none)
+                }
+            }
+        }
+        
         return cell
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        imageCache.removeAll()
     }
 }
 

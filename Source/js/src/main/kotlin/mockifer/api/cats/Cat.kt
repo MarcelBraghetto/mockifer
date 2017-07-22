@@ -34,7 +34,8 @@ import mockifer.core.framework.orDefault
 
 class Cat(@JsName("id") var id: String,
           @JsName("name") var name: String,
-          @JsName("age") var age: Int) {
+          @JsName("age") var age: Int,
+          @JsName("image") var image: String) {
 
     companion object : DtoCompanion<Cat> {
         override fun revive(dto: Cat) {
@@ -42,6 +43,7 @@ class Cat(@JsName("id") var id: String,
                 id = id.orDefault("")
                 name = name.orDefault("")
                 age = age.orDefault(0)
+                image = image.orDefault("")
             }
         }
 

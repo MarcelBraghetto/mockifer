@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3858D3A71F22FB8F00DAA1D3 /* MockiferManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3858D3A51F22FB8F00DAA1D3 /* MockiferManifest.cpp */; };
 		E22D21AB1F063481008A5708 /* MockiferUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E22D21A91F063481008A5708 /* MockiferUtil.cpp */; };
 		E23A995B1F0837C100618374 /* InputFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A995A1F0837C100618374 /* InputFormatter.swift */; };
 		E24C89061EEA922B00DDFFB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C89051EEA922B00DDFFB8 /* AppDelegate.swift */; };
@@ -42,6 +43,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3858D3A51F22FB8F00DAA1D3 /* MockiferManifest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferManifest.cpp; sourceTree = "<group>"; };
+		3858D3A61F22FB8F00DAA1D3 /* MockiferManifest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferManifest.h; sourceTree = "<group>"; };
 		E22D21A91F063481008A5708 /* MockiferUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MockiferUtil.cpp; sourceTree = "<group>"; };
 		E22D21AA1F063481008A5708 /* MockiferUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockiferUtil.h; sourceTree = "<group>"; };
 		E23A995A1F0837C100618374 /* InputFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputFormatter.swift; path = Mockifer/InputFormatter.swift; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 				E27CD55E1EFDA91300C4BC7B /* MockiferServer.cpp */,
 				E22D21AA1F063481008A5708 /* MockiferUtil.h */,
 				E22D21A91F063481008A5708 /* MockiferUtil.cpp */,
+				3858D3A51F22FB8F00DAA1D3 /* MockiferManifest.cpp */,
+				3858D3A61F22FB8F00DAA1D3 /* MockiferManifest.h */,
 			);
 			name = engine;
 			path = ../../engine;
@@ -274,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E24C89321EEA933900DDFFB8 /* Mockifer.mm in Sources */,
+				3858D3A71F22FB8F00DAA1D3 /* MockiferManifest.cpp in Sources */,
 				E2872DDE1F00D159002FBCE9 /* MockiferRouteManager.cpp in Sources */,
 				E2ADDF6F1EF50F5E00A2DD38 /* MainViewController.swift in Sources */,
 				E23A995B1F0837C100618374 /* InputFormatter.swift in Sources */,

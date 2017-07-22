@@ -3,22 +3,26 @@
     {
       "id": "id1",
       "name": "Smish",
-      "age": 8
+      "age": 8,
+      "image": "/data/images/kitty1.png"
     },
     {
       "id": "id2",
       "name": "Rose",
-      "age": 7
+      "age": 7,
+      "image": "/data/images/kitty2.png"
     },
     {
       "id": "id3",
       "name": "Crusty",
-      "age": 9
+      "age": 9,
+      "image": "/data/images/kitty3.png"
     },
     {
       "id": "id4",
       "name": "Furball",
-      "age": 6
+      "age": 6,
+      "image": "/data/images/kitty4.png"
     }
   ]
 }

@@ -3,5 +3,12 @@
     "kotlin.js",
     "mockifer.js",
     "api.js"
+  ],
+  "binary_response_file_types": [
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".txt",
+    ".pdf"
   ]
 }

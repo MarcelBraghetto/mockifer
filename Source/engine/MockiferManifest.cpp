@@ -27,27 +27,5 @@
  *
  */
 
-#pragma once
-
-#include "MockiferCore.h"
 #include "MockiferManifest.h"
 
-NS_MOCKIFER_BEGIN
-
-class MockiferUtil {
-public:
-    static MockiferManifest loadManifest(const string &contentPath);
-    static bool pathExists(const string &path, const bool &isDirectory);
-    static pair<bool, string> loadTextFile(const string &path);
-    static bool saveTextFile(const string &path, const string &content);
-    static bool deleteFile(const string &path);
-    static vector<string> split(const string &input, const char &delimiter);
-    static string absolutePath(const string &path);
-    static string toLowerCase(string source);
-    
-private:
-    MockiferUtil(){}
-    ~MockiferUtil(){}
-};
-
-NS_MOCKIFER_END

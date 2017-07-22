@@ -22,7 +22,7 @@ class DetailsViewController: UIViewController {
     }
     
     @IBAction func onSaveCatSelected(_ sender: UIButton) {
-        let requestBody = "{\"id\":\"\(cat.id)\",\"name\":\"\(catNameField.text!)\",\"age\":\(catAgeField.text!)}"
+        let requestBody = "{\"id\":\"\(cat.id)\",\"name\":\"\(catNameField.text!)\",\"age\":\(catAgeField.text!),\"image\":\"\(cat.image)\"}"
         
         Requester.load(method: "PUT", uri: "/cats", body: requestBody) { (data, response, error) in
             _ = self.navigationController?.popViewController(animated: true)

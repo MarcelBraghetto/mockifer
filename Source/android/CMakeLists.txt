@@ -34,6 +34,7 @@ src/main/cpp/mockifer-android.cpp
 ../engine/MockiferRouteManager.cpp
 ../engine/MockiferRoute.cpp
 ../engine/MockiferUtil.cpp
+../engine/MockiferManifest.cpp
 )
 
 find_library(
