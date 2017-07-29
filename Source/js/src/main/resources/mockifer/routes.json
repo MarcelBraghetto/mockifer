@@ -114,6 +114,16 @@
          "routeDescription" : "Test a request with a simulated delay before receiving the response.",
          "routeDisplayName" : "Test Simulate Response Delay",
          "routeId" : "test.simulate.response.delay"
+      },
+      {
+         "isInternal" : true,
+         "requestMethod" : "GET",
+         "requestUri" : "/test/magic_tokens",
+         "responseJsonFile" : "test.magictokens.json",
+         "responseStatusCode" : 200,
+         "routeDescription" : "Example of using 'magic tokens' in a JSON response to dynamically substitute fields.",
+         "routeDisplayName" : "Test Magic Tokens",
+         "routeId" : "test.magictokens"
       }
    ]
 }

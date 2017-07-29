@@ -29,16 +29,20 @@
 
 package mockifer.core.framework
 
+import mockifer.core.framework.MagicTokenResolver.resolveMagicTokens
+
 object FileLoader {
     /**
      * Attempt to load and parse the given file path into the given type.
      *
      * The parsing will be performed blindly, the onus is on the caller of this method to
      * perform any required validation after the content is loaded.
+     *
+     * Any 'magic tokens' will also be replaced with their substitutions during the load.
      */
     fun <T> loadJsonDataFile(filePath: String): T? {
         try {
-            val json = mockifer_loadDataFile(filePath) ?: ""
+            val json = resolveMagicTokens(mockifer_loadDataFile(filePath) ?: "")
             return JSON.parse<T>(json)
         } catch (e: dynamic) {
             return null
@@ -52,7 +56,7 @@ object FileLoader {
      */
     fun loadRawDataFile(filePath: String): String? {
         try {
-            return mockifer_loadDataFile(filePath)
+            return resolveMagicTokens(mockifer_loadDataFile(filePath) ?: "")
         } catch (e: dynamic) {
             return null
         } catch (e: Error) {

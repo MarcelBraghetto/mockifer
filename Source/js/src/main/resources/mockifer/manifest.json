@@ -2,7 +2,8 @@
   "bootstrap_javascript": [
     "kotlin.js",
     "mockifer.js",
-    "api.js"
+    "api.js",
+    "utils.js"
   ],
   "binary_response_file_types": [
     ".png",

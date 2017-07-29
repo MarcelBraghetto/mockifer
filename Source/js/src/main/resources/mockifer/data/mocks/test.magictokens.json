@@ -1,0 +1,9 @@
+{
+	"today": "{{today}}",
+	"tomorrow": "{{today+1}}",
+	"yesterday": "{{today-1}}",
+	"todayWithTime": "{{todayTime}}",
+	"tomorrowWithTime": "{{todayTime+1}}",
+	"yesterdayWithTime": "{{todayTime-1}}",
+	"unknownMagicToken": "{{unknownToken}}"
+}

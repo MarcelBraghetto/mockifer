@@ -7,6 +7,7 @@
 - [Getting started guide](#quick_start_guide)
 - [Dynamic routing system](#routing_system)
 - [Working with Mockifer](#working_with_mockifer)
+- [Magic Tokens](#magic_tokens)
 - [Core engine walkthrough](#core_engine)
 - [Mockifer API](#mockifer_api)
 
@@ -399,6 +400,33 @@ If you have *Postman* installed, import the file ```Support/Mockifer.postman_col
 
 <img src="Support/ReadMeAssets/postman1.png" />
 
+<a name="magic_tokens"></a>
+--
+# Magic Tokens
+
+<img src="Support/ReadMeAssets/magic_tokens.png" />
+
+Mockifer has basic support for finding and replacing special tokens within responses with dynamically generated substitutions. For want of a better name, they are called *magic tokens* in Mockifer.
+
+*Magic tokens* are very handy for augmenting otherwise static JSON response files to allow them to include dynamic content. For example, a static JSON response file might include a *date* field that ideally should represent the date at which time it was served to the client, rather than the date the file was originally authored. By setting the value of the *date* field to a *magic token*, it can be dynamically replaced at run time with today's date.
+
+A *magic token* is a string within a JSON response file that starts with two opening braces ```{{``` and ends with two closing braces ```}}```. An example *magic token* could look like: ```{{content}}```
+
+If a *magic token* is detected when parsing a JSON response, handler code inside the Javascript application is run to process the ```content``` element. If the element should be substituted with something else, it will be replaced.
+
+The default implementation of the *magic token* substitution code is in the ```MagicTokenResolver.kt``` file in the Javascript application project. Feel free to add more substitution implementations as needed.
+
+The following default *magic token* implementations are included in this repository:
+
+| Token | Result |
+| ----- | ------ |
+|```{{today}}```| Will be substituted for the current date formatted as a short date. |
+|```{{today+n}}```| Where **n** is an integer, will be substituted for the current date *plus* **n** days. For example, ```{{today+1}}``` would show the formatted date for tomorrow.|
+|```{{today-n}}```| Where **n** is an integer, will be substituted for the current date *minus* **n** days. For example, ```{{today-1}}``` would show the formatted date for yesterday.|
+|```{{todayTime}}```| Will be substituted for the current date formatted as a long date including time and time zone. |
+|```{{todayTime+n}}```| Where **n** is an integer, will be substituted for the current date *plus* **n** days. For example, ```{{todayTime+1}}``` would show the formatted date and time for tomorrow.|
+|```{{todayTime-n}}```| Where **n** is an integer, will be substituted for the current date *minus* **n** days. For example, ```{{todayTime-1}}``` would show the formatted date and time for yesterday.|
+
 <a name="mockifer_api"></a>
 --
 # Core engine walkthrough
@@ -448,7 +476,6 @@ For brevity, only the *Swift* methods are shown below, but the Mockifer framewor
 | ```Mockifer.pushMock(routeid)``` | Enqueue the route with the given route id **once** to the list of *active* mock routes to evaluate.|
 | ```Mockifer.pushMock(routeid, times)```| Same as ```pushMock``` but the route will be added ```times``` number of times into the active mocks list.|
 | ```Mockifer.pushMock([routeid])```| Enqueue an array of route ids, **once** each, into the active mocks list.|
-
 
 # Licence
 

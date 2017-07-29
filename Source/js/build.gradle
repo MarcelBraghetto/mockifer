@@ -85,6 +85,11 @@ build.doLast() {
     }
 
     copy {
+        from new File("${outputDir}/mockifer/utils.js")
+        into "${productDir}"
+    }
+
+    copy {
         from new File("${outputDir}/mockifer/manifest.json")
         into "${productDir}"
     }

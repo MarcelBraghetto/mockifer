@@ -29,6 +29,8 @@
 
 package mockifer.core.framework
 
+import kotlin.js.Date
+
 /**
  * There is an expectation that the host provides this method that can load a file and return its text content.
  */
@@ -46,3 +48,21 @@ external fun mockifer_log(message: String)
  */
 @Suppress("unused")
 external fun mockifer_getActiveMocks(): String?
+
+/**
+ * Get a long formatted string representing the given date.
+ */
+@Suppress("unused")
+external fun mockifer_getFormattedDateLong(date: Date): String
+
+/**
+ * Get a short formatted string representing the given date.
+ */
+@Suppress("unused")
+external fun mockifer_getFormattedDateShort(date: Date): String
+
+/**
+ * Add (or subtract) the given number of days to the given date.
+ */
+@Suppress("unused")
+external fun mockifer_addDaysToDate(date: Date, days: Int): Date

@@ -32,6 +32,7 @@ package mockifer.core
 import mockifer.api.cats.CatsApi
 import mockifer.api.cats.CatsRepository
 import mockifer.api.mockifer.MockiferApi
+import mockifer.core.framework.toLongDateString
 import mockifer.core.model.Header
 import mockifer.core.model.Request
 import mockifer.core.model.RequestController
@@ -39,7 +40,7 @@ import kotlin.js.Date
 
 class ServerSession(val catsRepository: CatsRepository = CatsRepository()) {
 
-    val formattedServerTime get() = Date().toString()
+    val formattedServerTime get() = Date().toLongDateString()
 
     fun createResponseHeaders(request: Request? = null): Array<Header> {
         val responseHeaders = mutableMapOf<String, String>()

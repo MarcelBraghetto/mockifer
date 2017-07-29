@@ -29,6 +29,8 @@
 
 package mockifer.core.framework
 
+import kotlin.js.Date
+
 /**
  * Convert an object into a json string representation.
  */
@@ -53,3 +55,18 @@ fun <T> T?.orDefault(default: T): T = if (this.isMissing()) default else this!!
  * Get the first match within a regex result. Useful for extracting segments from a string.
  */
 fun Regex.getFirstMatch(input: String): String = this.find(input)?.destructured?.component1() ?: ""
+
+/**
+ * Get a short formatted string of the given date.
+ */
+fun Date.toShortDateString(): String = mockifer_getFormattedDateShort(this)
+
+/**
+ * Get a long formatted string of the given date.
+ */
+fun Date.toLongDateString(): String = mockifer_getFormattedDateLong(this)
+
+/**
+ * Add (or subtract) the given number of days to the given date.
+ */
+fun Date.addDays(days: Int): Date = mockifer_addDaysToDate(this, days)
