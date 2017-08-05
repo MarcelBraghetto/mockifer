@@ -32,16 +32,17 @@
 */
 function mockifer_getFormattedDateLong(date) {
     var shortDate = mockifer_getFormattedDateShort(date);
-    var hours = mockifer_paddedNumberString(date.getHours());
-    var minutes = mockifer_paddedNumberString(date.getMinutes());
-    var seconds = mockifer_paddedNumberString(date.getSeconds());
+    var hours = mockifer_paddedNumberString(date.getHours(), 2);
+    var minutes = mockifer_paddedNumberString(date.getMinutes(), 2);
+    var seconds = mockifer_paddedNumberString(date.getSeconds(), 2);
+    var milliseconds = mockifer_paddedNumberString(date.getMilliseconds(), 3);
 
     var timeZoneOffset = -date.getTimezoneOffset();
     var timeZoneSymbol = timeZoneOffset >= 0 ? '+' : '-';
-    var timeZoneHours = mockifer_paddedNumberString(timeZoneOffset / 60);
-    var timeZoneMinutes = mockifer_paddedNumberString(timeZoneOffset % 60);
+    var timeZoneHours = mockifer_paddedNumberString(timeZoneOffset / 60, 2);
+    var timeZoneMinutes = mockifer_paddedNumberString(timeZoneOffset % 60, 2);
 
-    return [shortDate, "T", hours, ":", minutes, ":", seconds, timeZoneSymbol, timeZoneHours, ":", timeZoneMinutes].join('');
+    return [shortDate, "T", hours, ":", minutes, ":", seconds, ".", milliseconds, timeZoneSymbol, timeZoneHours, ":", timeZoneMinutes].join('');
 }
 
 /*
@@ -49,8 +50,8 @@ function mockifer_getFormattedDateLong(date) {
 */
 function mockifer_getFormattedDateShort(date) {
     var year = date.getFullYear();
-    var month = mockifer_paddedNumberString(date.getMonth() + 1);
-    var day = mockifer_paddedNumberString(date.getDate());
+    var month = mockifer_paddedNumberString(date.getMonth() + 1, 2);
+    var day = mockifer_paddedNumberString(date.getDate(), 2);
     return [year, month, day].join('-');
 }
 
@@ -64,8 +65,14 @@ function mockifer_addDaysToDate(date, days) {
 }
 
 /*
- Left pad a number if it is less than 10.
+ Left pad a number up to the indicated number of times.
 */
-function mockifer_paddedNumberString(number) {
-    return (number > 9 ? "" : "0") + number;
+function mockifer_paddedNumberString(number, padTo) {
+    var result = "" + number;
+
+    while (result.length < padTo) {
+        result = "0" + result;
+    }
+
+    return result;
 }

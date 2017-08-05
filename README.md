@@ -83,6 +83,8 @@ At a glance, Mockifer is comprised of:
 --
 # Getting started guide
 
+> Important: Not covered in the video tutorial but before building Mockifer for the first time, please open the Mockifer Editor project in Xcode at least once and setup your developer signing profile in the project settings. The project can be found at *Source/editor/MockiferEditor.xcodeproj*. If you do not have a valid Apple Developer account in Xcode you will not be able to build the editor application as it is a MacOS app.<br/><br/>In addition for Android, you might need to configure an *ANDROID_HOME* environment variable which points to your Android SDK location. Typically this would go into your *~/.bash_profile* and look something like this: *export ANDROID_HOME=/Your/AbsolutePathTo/AndroidSDK*
+
 Video tutorial: [https://www.youtube.com/watch?v=uK-jodGaHZ0](https://www.youtube.com/watch?v=uK-jodGaHZ0)
 
 [![Mockifer - getting started](https://img.youtube.com/vi/uK-jodGaHZ0/0.jpg)](https://www.youtube.com/watch?v=uK-jodGaHZ0)
