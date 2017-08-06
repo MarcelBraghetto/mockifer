@@ -47,6 +47,11 @@ build.doFirst() {
     delete("${productDir}")
 }
 
+processResources.doFirst() {
+    delete("${buildDir}/resources")
+    delete("${outputDir}/mockifer")
+}
+
 build.doLast() {
     configurations.compile.each { File file ->
         copy {
