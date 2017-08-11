@@ -29,4 +29,9 @@
 
 package mockifer.core.model
 
-class Header(@JsName("key") val key: String, @JsName("value") val value: String)
+class Header(@JsName("key") val key: String, @JsName("value") val value: String) {
+    companion object {
+        val HEADER_CONNECTION = "Connection"
+        val VALUE_CLOSE = "close"
+    }
+}

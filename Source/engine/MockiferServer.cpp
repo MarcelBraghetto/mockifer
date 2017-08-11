@@ -337,12 +337,28 @@ MockiferResponse MockiferServer::processRequest(MockiferRequest request) {
     auto route = sServer->routesManager->findMatchingRoute(request);
     
     auto requestDto = request.createDto();
-
+    
     duk_get_global_string(context, "mockifer_handleServerRequest");
     duk_push_string(context, requestDto.c_str());
     duk_push_string(context, route.isValid() ? route.toJson().c_str() : NULL);
-    duk_call(context, 2);
-    MockiferResponse response {duk_safe_to_string(context, -1)};
+
+    MockiferResponse response;
+    
+    bool javascriptCallSuccess = true;
+    
+    if (duk_pcall(context, 2) != 0) {
+        javascriptCallSuccess = false;
+    }
+    
+    string javascriptReply = duk_safe_to_string(context, -1);
+    if (javascriptCallSuccess) {
+        response = MockiferResponse{javascriptReply};
+    } else {
+        LOGE("Handle server request exception caught for: %s, detail: %s", request.requestUri.c_str(), javascriptReply.c_str());
+        response.responseBody = "{\"mockiferJavascriptEngineError\": \"" + javascriptReply + "\"}";
+        response.responseBodyLength = response.responseBody.length();
+    }
+    
     duk_pop(context);
 
     // Simulate a response delay based on whether the current route had a custom delay ...

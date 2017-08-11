@@ -10,6 +10,8 @@
 - [Magic Tokens](#magic_tokens)
 - [Core engine walkthrough](#core_engine)
 - [Mockifer API](#mockifer_api)
+- [Product Binary Downloads](#binary_downloads)
+- [Licence](#licence)
 
 <a name="introduction"></a>
 --
@@ -83,7 +85,7 @@ At a glance, Mockifer is comprised of:
 --
 # Getting started guide
 
-> Important: Not covered in the video tutorial but before building Mockifer for the first time, please open the Mockifer Editor project in Xcode at least once and setup your developer signing profile in the project settings. The project can be found at *Source/editor/MockiferEditor.xcodeproj*. If you do not have a valid Apple Developer account in Xcode you will not be able to build the editor application as it is a MacOS app.<br/><br/>In addition for Android, you might need to configure an *ANDROID_HOME* environment variable which points to your Android SDK location. Typically this would go into your *~/.bash_profile* and look something like this: *export ANDROID_HOME=/Your/AbsolutePathTo/AndroidSDK*
+> Important: Not covered in the video tutorial but before building Mockifer for the first time, please open the Mockifer Editor project in Xcode at least once and setup your developer signing profile in the project settings. The project can be found at *Source/editor/MockiferEditor.xcodeproj*. If you do not have a valid Apple Developer account in Xcode you will not be able to build the editor application as it is a MacOS app, however you can download a precompiled binary and manually put it into the *Products* folder. Go to the [product binaries download section](#binary_downloads) to download the editor.<br/><br/>In addition for Android, you might need to configure an *ANDROID_HOME* environment variable which points to your Android SDK location. Typically this would go into your *~/.bash_profile* and look something like this: *export ANDROID_HOME=/Your/AbsolutePathTo/AndroidSDK*
 
 Video tutorial: [https://www.youtube.com/watch?v=uK-jodGaHZ0](https://www.youtube.com/watch?v=uK-jodGaHZ0)
 
@@ -478,6 +480,67 @@ For brevity, only the *Swift* methods are shown below, but the Mockifer framewor
 | ```Mockifer.pushMock(routeid)``` | Enqueue the route with the given route id **once** to the list of *active* mock routes to evaluate.|
 | ```Mockifer.pushMock(routeid, times)```| Same as ```pushMock``` but the route will be added ```times``` number of times into the active mocks list.|
 | ```Mockifer.pushMock([routeid])```| Enqueue an array of route ids, **once** each, into the active mocks list.|
+
+<a name="binary_downloads"></a>
+--
+# Product Binary Downloads
+
+**Mockifer Editor**
+
+[Download Mockifer Editor Binary (mockifer_editor.zip)](Support/ReadMeAssets/BinaryDownloads/mockifer_editor.zip)
+
+After downloading, unzip and copy *MockiferEditor.app* into the following folder:
+
+```Products/editor```
+
+<img src="Support/ReadMeAssets/product_folder_editor.png" />
+
+**Mockifer Console**
+
+[Download Mockifer Console Binary (mockifer_console.zip)](Support/ReadMeAssets/BinaryDownloads/mockifer_console.zip)
+
+After downloading, unzip and copy *mockifer* into the following folder:
+
+```Products/console```
+
+<img src="Support/ReadMeAssets/product_folder_console.png" />
+
+**Mockifer iOS Framework**
+
+[Download Mockifer iOS Framework (mockifer_ios_framework.zip)](Support/ReadMeAssets/BinaryDownloads/mockifer_ios_framework.zip)
+
+After downloading, unzip and copy *Mockifer.framework* into the following folders:
+
+```Products/ios```
+
+<img src="Support/ReadMeAssets/product_folder_ios.png" />
+
+and to sync the iOS sample app:
+
+```Products/sample-ios```
+
+<img src="Support/ReadMeAssets/product_folder_sample_ios.png" />
+
+**Mockifer Android .AAR library**
+
+[Download Mockifer Android Library (mockifer_android_aar.zip)](Support/ReadMeAssets/BinaryDownloads/mockifer_android_aar.zip)
+
+After downloading, unzip and copy *mockifer.aar* into the following folders:
+
+```Products/android```
+
+<img src="Support/ReadMeAssets/product_folder_android.png" />
+
+and to sync the Android sample app:
+
+```Products/sample-android/app/libs```
+
+<img src="Support/ReadMeAssets/product_folder_sample_android.png" />
+
+Of course if you make any code changes to the source projects for any of the product binary targets, you'll need to recompile them yourself.
+
+<a name="licence"></a>
+--
 
 # Licence
 

@@ -44,6 +44,7 @@ class ServerSession(val catsRepository: CatsRepository = CatsRepository()) {
 
     fun createResponseHeaders(request: Request? = null): Array<Header> {
         val responseHeaders = mutableMapOf<String, String>()
+        responseHeaders[Header.HEADER_CONNECTION] = Header.VALUE_CLOSE
 
         // Add any response headers that should be returned.
         responseHeaders["Mockifer"] = "Powered by Mockifer!"

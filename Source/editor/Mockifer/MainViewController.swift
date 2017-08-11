@@ -162,7 +162,7 @@ class MainViewController : BaseViewController, NSTableViewDelegate, NSTextViewDe
         currentRoute.routeDisplayName = routeDisplayNameField.stringValue
         currentRoute.routeDescription = routeDescriptionField.stringValue
         currentRoute.requestMethod = requestMethodField.stringValue.uppercased()
-        currentRoute.requestUri = requestUriField.stringValue.lowercased()
+        currentRoute.requestUri = requestUriField.stringValue
         currentRoute.requestOverrideRouteId = requestRouteOverrideField.stringValue
         currentRoute.requestQueryStringContains = requestQueryStringContainsField.stringValue
         currentRoute.requestQueryStringEquals = requestQueryStringEqualsField.stringValue
