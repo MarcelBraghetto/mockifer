@@ -117,4 +117,10 @@ build.doLast() {
         from new File("${buildDir}/classes/main/min/kotlin.js")
         into "${productDir}"
     }
+
+    // Write a properties file that has some dynamic elements such as most recent build time.
+    def properties = new Properties()
+    def propertiesFile = new File("${productDir}/mockifer.properties")
+    properties.setProperty('last-build-time', System.currentTimeMillis() as String)
+    properties.store(propertiesFile.newWriter(), null)
 }

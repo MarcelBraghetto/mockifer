@@ -29,9 +29,11 @@
 
 package mockifer;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,12 +44,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static android.content.Context.MODE_PRIVATE;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public final class Mockifer {
     private static String CONTENT_PATH = "";
     private static int SERVER_PORT = 8503;
+    private static final String SHARED_PREF = "mockifer";
+    private static final String PREF_LAST_MODIFIED = "mockifer-last-modified";
 
     private Mockifer() {
     }
@@ -71,20 +78,50 @@ public final class Mockifer {
      * @param application to associate with Mockifer.
      * @param port        to listen on.
      */
+    @SuppressLint("ApplySharedPref")
     public static void install(@NonNull Application application, int port) {
         CONTENT_PATH = application.getFilesDir().getAbsolutePath() + "/mockifer-js";
         SERVER_PORT = port;
 
-        try {
-            File mockiferDirectory = new File(CONTENT_PATH);
-            if (mockiferDirectory.exists()) {
-                delete(mockiferDirectory);
-            }
+        boolean needsRebuild = false;
 
-            copy(application, "mockifer-js", "mockifer-js");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
+        try {
+            InputStream inputStream = application.getAssets().open("mockifer-js/mockifer.properties");
+            Properties properties = new Properties();
+            properties.load(inputStream);
+            long propertiesLastModified = Long.valueOf(properties.getProperty("last-build-time", "0"));
+
+            SharedPreferences sharedPreferences = application.getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+            long savedLastModified = sharedPreferences.getLong(PREF_LAST_MODIFIED, 0L);
+
+            // We really only want to go through the process of copying assets to private
+            // storage when absolutely needed - in our case only if the mockifer assets
+            // in the app have a different build time to when we performed this operation
+            // last time. This means the asset file copying only happens once unless the
+            // mockifer-js content is changed between builds.
+            if (propertiesLastModified != savedLastModified) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putLong(PREF_LAST_MODIFIED, propertiesLastModified);
+                editor.commit();
+                needsRebuild = true;
+            }
+        } catch (IOException | NumberFormatException e) {
+            needsRebuild = true;
+        }
+
+        if (needsRebuild) {
+            try {
+                File mockiferDirectory = new File(CONTENT_PATH);
+
+                if (mockiferDirectory.exists()) {
+                    delete(mockiferDirectory);
+                }
+
+                copy(application, "mockifer-js", "mockifer-js");
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
         }
 
         application.registerActivityLifecycleCallbacks(new MockiferLifecycle());
@@ -253,8 +290,8 @@ public final class Mockifer {
     }
 
 
-    private static void copyAssetFile(Context context, String assetFilePath, String destinationFilePath)
-            throws IOException {
+    @SuppressLint("ApplySharedPref")
+    private static void copyAssetFile(Context context, String assetFilePath, String destinationFilePath) throws IOException {
         InputStream in = context.getApplicationContext().getAssets().open(assetFilePath);
         OutputStream out = new FileOutputStream(destinationFilePath);
 
