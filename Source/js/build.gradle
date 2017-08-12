@@ -1,6 +1,9 @@
 buildscript {
-    ext.kotlin_version = '1.1.3-2'
+    // Using early access preview of 1.1.4 to get Javascript minifying. Once version
+    // 1.1.4 is stable, there will be no need for the additional Maven repositories.
+    ext.kotlin_version = '1.1.4-eap-77'
     repositories {
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap-1.1' }
         jcenter()
     }
     dependencies {
@@ -12,29 +15,27 @@ group 'mockifer'
 version '0.0.1'
 
 apply plugin: 'kotlin2js'
+apply plugin: 'kotlin-dce-js'
 
 def outputDir = 'out'
 def buildDir = 'build'
 def productDir = "${projectDir}/../../Products/js/mockifer-js"
 
-sourceSets {
-    main.kotlin.srcDirs += "src/main/kotlin"
-    test.kotlin.srcDirs += "src/test/kotlin"
-}
-
 compileKotlin2Js {
-    kotlinOptions.outputFile = "${projectDir}/${outputDir}/mockifer.js"
-    kotlinOptions.suppressWarnings = true
     kotlinOptions.sourceMap = true
 }
 
+// Need to keep the Mockifer methods that are called from the 'api.js' so they don't
+// get minified out of the build.
+runDceKotlinJs.keep "js_main.mockiferProcessRequest, js_main.mockiferReset"
+
 repositories {
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap-1.1' }
     jcenter()
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
-    testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
 }
 
 clean.doFirst() {
@@ -105,12 +106,15 @@ build.doLast() {
     }
 
     copy {
-        from new File("${outputDir}/mockifer.js")
+        from new File("${buildDir}/classes/main/min/js_main.js")
         into "${productDir}"
+        rename { String fileName ->
+            fileName.replace('js_main.js', 'mockifer.js')
+        }
     }
 
     copy {
-        from new File("${outputDir}/kotlin.js")
+        from new File("${buildDir}/classes/main/min/kotlin.js")
         into "${productDir}"
     }
 }
