@@ -27,7 +27,8 @@ compileKotlin2Js {
 
 // Need to keep the Mockifer methods that are called from the 'api.js' so they don't
 // get minified out of the build.
-runDceKotlinJs.keep "js_main.mockiferProcessRequest, js_main.mockiferReset"
+runDceKotlinJs.keep "js_main.mockiferProcessRequest"
+runDceKotlinJs.keep "js_main.mockiferReset"
 
 repositories {
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap-1.1' }
