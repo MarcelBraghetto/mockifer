@@ -1,9 +1,6 @@
 buildscript {
-    // Using early access preview of 1.1.4 to get Javascript minifying. Once version
-    // 1.1.4 is stable, there will be no need for the additional Maven repositories.
-    ext.kotlin_version = '1.1.4-eap-77'
+    ext.kotlin_version = '1.1.4'
     repositories {
-        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap-1.1' }
         jcenter()
     }
     dependencies {
@@ -31,7 +28,6 @@ runDceKotlinJs.keep "js_main.mockiferProcessRequest"
 runDceKotlinJs.keep "js_main.mockiferReset"
 
 repositories {
-    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap-1.1' }
     jcenter()
 }
 
