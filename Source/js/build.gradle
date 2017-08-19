@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.1.4'
+    ext.kotlin_version = '1.1.4-2'
     repositories {
         jcenter()
     }
@@ -20,6 +20,7 @@ def productDir = "${projectDir}/../../Products/js/mockifer-js"
 
 compileKotlin2Js {
     kotlinOptions.sourceMap = true
+    kotlinOptions.sourceMapEmbedSources = "always"
 }
 
 // Need to keep the Mockifer methods that are called from the 'api.js' so they don't
@@ -103,7 +104,7 @@ build.doLast() {
     }
 
     copy {
-        from new File("${buildDir}/classes/main/min/js_main.js")
+        from new File("${buildDir}/classes/kotlin/main/min/js_main.js")
         into "${productDir}"
         rename { String fileName ->
             fileName.replace('js_main.js', 'mockifer.js')
@@ -111,7 +112,7 @@ build.doLast() {
     }
 
     copy {
-        from new File("${buildDir}/classes/main/min/kotlin.js")
+        from new File("${buildDir}/classes/kotlin/main/min/kotlin.js")
         into "${productDir}"
     }
 
