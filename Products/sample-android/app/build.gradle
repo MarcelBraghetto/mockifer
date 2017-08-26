@@ -54,7 +54,7 @@ task refreshMockiferContent {
         delete("${projectDir}/src/main/assets/mockifer-js")
         copy {
             includeEmptyDirs = true
-            from new File("${projectDir}/../../js/mockifer-js")
+            from new File("${projectDir}/../../android/mockifer-js")
             into "${projectDir}/src/main/assets/mockifer-js"
         }
     }

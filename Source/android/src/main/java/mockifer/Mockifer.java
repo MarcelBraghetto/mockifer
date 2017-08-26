@@ -34,18 +34,23 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -53,8 +58,10 @@ import static android.content.Context.MODE_PRIVATE;
 public final class Mockifer {
     private static String CONTENT_PATH = "";
     private static int SERVER_PORT = 8503;
+    private static final String TAG = "MOCKIFER";
     private static final String SHARED_PREF = "mockifer";
     private static final String PREF_LAST_MODIFIED = "mockifer-last-modified";
+    private static final String ZIP_FILE_NAME = "mockifer-js.zip";
 
     private Mockifer() {
     }
@@ -64,7 +71,7 @@ public final class Mockifer {
     }
 
     /**
-     * Install Mockifer with the default settings - access via http://localhost:8700
+     * Install Mockifer with the default settings - access via http://localhost:8503
      *
      * @param application to associate with Mockifer.
      */
@@ -110,6 +117,9 @@ public final class Mockifer {
         }
 
         if (needsRebuild) {
+            Log.d(TAG, "New content detected, performing data sync, be patient!");
+            long now = System.currentTimeMillis();
+
             try {
                 File mockiferDirectory = new File(CONTENT_PATH);
 
@@ -117,11 +127,24 @@ public final class Mockifer {
                     delete(mockiferDirectory);
                 }
 
-                copy(application, "mockifer-js", "mockifer-js");
+                String internalZipFilePath = application.getFilesDir().getAbsolutePath() + "/" + ZIP_FILE_NAME;
+                String targetUnzipPath = application.getFilesDir().getAbsolutePath() + "/mockifer-js";
+
+                // We copy the 'mockifer-js.zip' file from the assets directory to internal storage.
+                copyAssetFile(application, "mockifer-js/" + ZIP_FILE_NAME, internalZipFilePath);
+
+                // Then inflate the zip file directly inside internal storage.
+                unzip(internalZipFilePath, targetUnzipPath);
+
+                // Then clean up the copied fip file
+                delete(new File(internalZipFilePath));
             } catch (IOException e) {
                 e.printStackTrace();
+                Log.e(TAG, "Fatal - could not unpack content!");
                 return;
             }
+
+            Log.d(TAG, "New content sync completed in " + (System.currentTimeMillis() - now) + "ms");
         }
 
         application.registerActivityLifecycleCallbacks(new MockiferLifecycle());
@@ -264,32 +287,6 @@ public final class Mockifer {
         target.delete();
     }
 
-    private static String copy(Context context, String assetPath, String destinationPath) throws IOException {
-        File filesDirectory = context.getFilesDir();
-        String targetPath = filesDirectory + addLeadingSlash(destinationPath);
-        File targetDirectory = new File(targetPath);
-
-        createDir(targetDirectory);
-
-        AssetManager assetManager = context.getApplicationContext().getAssets();
-        String[] fileNameList = assetManager.list(assetPath);
-
-        for (String fileName : fileNameList) {
-            String filePath = addTrailingSlash(assetPath) + fileName;
-            String fileChildren[] = assetManager.list(filePath);
-
-            if (fileChildren.length == 0) {
-                String targetFilePath = addTrailingSlash(targetPath) + fileName;
-                copyAssetFile(context, filePath, targetFilePath);
-            } else {
-                copy(context, filePath, addTrailingSlash(destinationPath) + fileName);
-            }
-        }
-
-        return targetPath;
-    }
-
-
     @SuppressLint("ApplySharedPref")
     private static void copyAssetFile(Context context, String assetFilePath, String destinationFilePath) throws IOException {
         InputStream in = context.getApplicationContext().getAssets().open(assetFilePath);
@@ -304,30 +301,59 @@ public final class Mockifer {
         out.close();
     }
 
-    private static String addTrailingSlash(String path) {
-        if (path.charAt(path.length() - 1) != '/') {
-            path += "/";
-        }
-        return path;
-    }
+    private static void unzip(String zipFilePath, String destinationPath) throws IOException {
+        int size;
+        final int BUFFER_SIZE = 1024;
+        byte[] buffer = new byte[BUFFER_SIZE];
 
-    private static String addLeadingSlash(String path) {
-        if (path.charAt(0) != '/') {
-            path = "/" + path;
-        }
-        return path;
-    }
+        try {
+            if (!destinationPath.endsWith(File.separator)) {
+                destinationPath += File.separator;
+            }
+            File destinationFile = new File(destinationPath);
+            if (!destinationFile.isDirectory()) {
+                destinationFile.mkdirs();
+            }
 
-    private static void createDir(File directory) throws IOException {
-        if (directory.exists()) {
-            if (!directory.isDirectory()) {
-                throw new IOException("A file of the same name already exists.");
+            ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(new FileInputStream(zipFilePath), BUFFER_SIZE));
+
+            try {
+                ZipEntry zipEntry;
+                while ((zipEntry = zipInputStream.getNextEntry()) != null) {
+                    String path = destinationPath + zipEntry.getName();
+                    File unzipFile = new File(path);
+
+                    if (zipEntry.isDirectory()) {
+                        if (!unzipFile.isDirectory()) {
+                            unzipFile.mkdirs();
+                        }
+                    } else {
+                        File parentDirectory = unzipFile.getParentFile();
+                        if (parentDirectory != null) {
+                            if (!parentDirectory.isDirectory()) {
+                                parentDirectory.mkdirs();
+                            }
+                        }
+
+                        FileOutputStream fileOutputStream = new FileOutputStream(unzipFile, false);
+                        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream, BUFFER_SIZE);
+                        try {
+                            while ((size = zipInputStream.read(buffer, 0, BUFFER_SIZE)) != -1) {
+                                bufferedOutputStream.write(buffer, 0, size);
+                            }
+
+                            zipInputStream.closeEntry();
+                        } finally {
+                            bufferedOutputStream.flush();
+                            bufferedOutputStream.close();
+                        }
+                    }
+                }
+            } finally {
+                zipInputStream.close();
             }
-        } else {
-            directory.mkdirs();
-            if (!directory.isDirectory()) {
-                throw new IOException("Unable to create directory");
-            }
+        } catch (Exception e) {
+            Log.e(TAG, "Fatal - could not unzip content!", e);
         }
     }
     //endregion

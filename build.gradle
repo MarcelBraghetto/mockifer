@@ -21,16 +21,21 @@ task mockiferBuildJavascriptEngine {
         // Update Android framework
         delete("./Products/android/mockifer-js")
         copy {
-            includeEmptyDirs = true
-            from new File("./Products/js/mockifer-js")
+            from new File("./Products/js/mockifer-js/mockifer.properties")
             into "./Products/android/mockifer-js"
         }
+
+        task(mockiferBuildJavascriptEngineZip, type: Zip) {
+            from fileTree("./Products/js/mockifer-js/")
+            destinationDir new File("./Products/android/mockifer-js/")
+            archiveName 'mockifer-js.zip'
+        }.execute()
 
         // Update Android sample app
         delete("./Products/sample-android/app/src/main/assets/mockifer-js")
         copy {
             includeEmptyDirs = true
-            from new File("./Products/js/mockifer-js")
+            from new File("./Products/android/mockifer-js")
             into "./Products/sample-android/app/src/main/assets/mockifer-js"
         }
 
@@ -113,19 +118,24 @@ task mockiferBuildAndroid {
     dependsOn = ["mockiferBuildJavascriptEngine", ":Source:android:mockiferBuildFramework"]
 
     doLast {
-        // Update mockifer-js in the Android framework folder.
+        // Update Android framework
         delete("./Products/android/mockifer-js")
         copy {
-            includeEmptyDirs = true
-            from new File("./Products/js/mockifer-js")
+            from new File("./Products/js/mockifer-js/mockifer.properties")
             into "./Products/android/mockifer-js"
         }
 
-        // Update mockifer-js in the Android example app.
+        task(mockiferBuildAndroidZip, type: Zip) {
+            from fileTree("./Products/js/mockifer-js/")
+            destinationDir new File("./Products/android/mockifer-js/")
+            archiveName 'mockifer-js.zip'
+        }.execute()
+
+        // Update Android sample app
         delete("./Products/sample-android/app/src/main/assets/mockifer-js")
         copy {
             includeEmptyDirs = true
-            from new File("./Products/js/mockifer-js")
+            from new File("./Products/android/mockifer-js")
             into "./Products/sample-android/app/src/main/assets/mockifer-js"
         }
     }
