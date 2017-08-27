@@ -339,6 +339,7 @@ class MainViewController : BaseViewController, NSTableViewDelegate, NSTextViewDe
         if currentRoute.responseJsonFile.characters.count == 0 {
             jsonContentField.string = ""
         } else {
+            jsonContentFileField.stringValue = "data/mocks/\(currentRoute.responseJsonFile)"
             jsonContentField.string = Mockifer.loadRouteJsonFileContent(currentRoute.routeId);
         }
     }
@@ -403,11 +404,11 @@ class MainViewController : BaseViewController, NSTableViewDelegate, NSTextViewDe
     }
     
     func lockRouteIdField() {
-        routeIdField.isEnabled = false
+        routeIdField.isEditable = false
     }
     
     func unlockRouteIdField() {
-        routeIdField.isEnabled = true
+        routeIdField.isEditable = true
     }
     
     func deleteCurrentRoute() {

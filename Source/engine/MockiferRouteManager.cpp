@@ -289,6 +289,7 @@ MockiferRoute MockiferRouteManager::findMatchingRoute(const MockiferRequest &req
     // To begin with, attempt to match and consume any currently active mock routes.
     auto result = consumeActiveMock(request);
     if (result.isValid()) {
+        LOGD("Mock match: %s", result.routeId.c_str());
         return result;
     }
     
@@ -301,8 +302,10 @@ MockiferRoute MockiferRouteManager::findMatchingRoute(const MockiferRequest &req
             auto activeMockRoute = consumeActiveMock(internalRoute);
             
             if (activeMockRoute.isValid()) {
+                LOGD("Mock (%s) intercepted internal route (%s)", activeMockRoute.routeId.c_str(), internalRoute.routeId.c_str());
                 result = activeMockRoute;
             } else {
+                LOGD("Internal route match: %s", internalRoute.routeId.c_str());
                 result = internalRoute;
             }
             
