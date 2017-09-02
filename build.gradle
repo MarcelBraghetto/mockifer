@@ -21,15 +21,9 @@ task mockiferBuildJavascriptEngine {
         // Update Android framework
         delete("./Products/android/mockifer-js")
         copy {
-            from new File("./Products/js/mockifer-js/mockifer.properties")
+            from new File("./Products/js/mockifer-js")
             into "./Products/android/mockifer-js"
         }
-
-        task(mockiferBuildJavascriptEngineZip, type: Zip) {
-            from fileTree("./Products/js/mockifer-js/")
-            destinationDir new File("./Products/android/mockifer-js/")
-            archiveName 'mockifer-js.zip'
-        }.execute()
 
         // Update Android sample app
         delete("./Products/sample-android/app/src/main/assets/mockifer-js")
@@ -121,15 +115,9 @@ task mockiferBuildAndroid {
         // Update Android framework
         delete("./Products/android/mockifer-js")
         copy {
-            from new File("./Products/js/mockifer-js/mockifer.properties")
+            from new File("./Products/js/mockifer-js")
             into "./Products/android/mockifer-js"
         }
-
-        task(mockiferBuildAndroidZip, type: Zip) {
-            from fileTree("./Products/js/mockifer-js/")
-            destinationDir new File("./Products/android/mockifer-js/")
-            archiveName 'mockifer-js.zip'
-        }.execute()
 
         // Update Android sample app
         delete("./Products/sample-android/app/src/main/assets/mockifer-js")

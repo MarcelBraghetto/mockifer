@@ -60,4 +60,14 @@ task refreshMockiferContent {
     }
 }
 
-preBuild.dependsOn refreshMockiferContent
+// This task creates a zip archive of the Mockifer content in the assets folder. The internal Mockifer
+// library will look for this zip file so it can uncompress it internally on start up. There is no
+// need to check the zip file into version control as it will be generated dynamically each time.
+task zipMockiferAssets(dependsOn: 'refreshMockiferContent', type: Zip) {
+    from fileTree("${projectDir}/src/main/assets/mockifer-js")
+    destinationDir new File("${projectDir}/src/main/assets/mockifer-js/")
+    archiveName "mockifer-js.zip"
+    exclude "mockifer-js.zip"
+}
+
+preBuild.dependsOn zipMockiferAssets
