@@ -386,7 +386,7 @@ If you have *Postman* installed, import the file ```support/samples/postman/Mock
 --
 # Magic Tokens
 
-<img src="Support/readme_assets/magic_tokens.png" />
+<img src="support/readme_assets/magic_tokens.png" />
 
 Mockifer has basic support for finding and replacing special tokens within responses with dynamically generated substitutions. For want of a better name, they are called *magic tokens* in Mockifer.
 
