@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mockifer Admin</title>
+</head>
+<style>
+    * {
+      font-family: Verdana;
+      font-size: 18px;
+    }
+</style>
+<body onload="javascript:begin()">
+
+<script type="text/javascript">
+function prettify(input) {
+    return "<pre>" + JSON.stringify(JSON.parse(input), null, 3) + "</pre>";
+}
+
+function begin() {
+    document.body.innerHTML = "Sample API calls";
+    document.body.innerHTML += "<hr/>";
+
+    // Getting all server internalRoutes
+    document.body.innerHTML += "Getting all mockifer server internalRoutes...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("GET", "/mockifer/internalRoutes", null));
+    document.body.innerHTML += "<br/><hr/>";
+
+    // Get all cats
+    document.body.innerHTML += "Getting all cats...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("GET", "/cats", null));
+    document.body.innerHTML += "<br/><hr/>";
+
+    // Get cat with unknown id
+    document.body.innerHTML += "Getting cat with unknown id:...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("GET", "/cats/invalidid", null));
+    document.body.innerHTML += "<br/><hr/>";
+
+    // Get cat with id1
+    document.body.innerHTML += "Getting cat with id1:...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("GET", "/cats/id1", null));
+    document.body.innerHTML += "<br/><hr/>";
+
+    // Delete cat with unknown id
+    document.body.innerHTML += "Deleting cat with unknown id:...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("DELETE", "/cats/invalidid", null));
+    document.body.innerHTML += "<br/><hr/>";
+
+    // Delete cat with id1
+    document.body.innerHTML += "Deleting cat with id1:...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("DELETE", "/cats/id1", null));
+    document.body.innerHTML += "<br/><br/>";
+
+    // Get all cats after delete
+    document.body.innerHTML += "Getting all cats after delete...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("GET", "/cats", null));
+    document.body.innerHTML += "<br/><hr/>";
+
+    // Update invalid cat
+    var updateInvalidCat = {}
+    updateInvalidCat.id = "invalidid";
+    updateInvalidCat.name = "Puddy Tat";
+    updateInvalidCat.age = 12;
+
+    document.body.innerHTML += "Updating cat with invalid id...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("PUT", "/cats", JSON.stringify(updateInvalidCat)));
+    document.body.innerHTML += "<br/><hr/>";
+
+    // Update valid cat
+    var updateValidCat = {}
+    updateValidCat.id = "id2";
+    updateValidCat.name = "Puddy Tat";
+    updateValidCat.age = 12;
+
+    document.body.innerHTML += "Updating cat with id2...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("PUT", "/cats", JSON.stringify(updateValidCat)));
+    document.body.innerHTML += "<br/><br/>";
+
+    // Get all cats after update
+    document.body.innerHTML += "Getting all cats after updating id2...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("GET", "/cats", null));
+    document.body.innerHTML += "<br/><hr/>";
+
+    // Create cat
+    var newCat = {}
+    newCat.name = "Noob Ca";
+    newCat.age = 1;
+    document.body.innerHTML += "Creating new cat with name Noob Cat...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("POST", "/cats", JSON.stringify(newCat)));
+    document.body.innerHTML += "<br/><br/>";
+
+    // Get all cats after create
+    document.body.innerHTML += "Getting all cats after creating Noob Cat...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("GET", "/cats", null));
+    document.body.innerHTML += "<br/><hr/>";
+
+    // Perform a server reset
+    document.body.innerHTML += "Requesting the server session to be reset...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("PUT", "/mockifer/reset", null));
+    document.body.innerHTML += "<br/><br/>";
+
+    // Get all cats after server reset
+    document.body.innerHTML += "Getting all cats after server reset...<br/><br/>"
+    document.body.innerHTML += prettify(doRequest("GET", "/cats", null));
+}
+
+function doRequest(method, uri, requestBody) {
+    var request = new XMLHttpRequest();
+    request.open(method, "http://localhost:8500" + uri, false);
+    request.send(requestBody);
+    return request.responseText;
+}
+</script>
+</body>
+</html>

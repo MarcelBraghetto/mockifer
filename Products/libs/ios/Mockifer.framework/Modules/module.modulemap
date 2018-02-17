@@ -1,0 +1,6 @@
+framework module Mockifer {
+  umbrella header "Mockifer.h"
+
+  export *
+  module * { export * }
+}

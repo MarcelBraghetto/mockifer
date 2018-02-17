@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+// You are running an emulator and you want to point at the Mockifer Editor running on your computer.
+def SERVER_URL_EMULATOR_EDITOR = "http://10.0.2.2:8501"
+
+// You are running on a real device via USB with port forwarding.
+def SERVER_URL_USB_DEVICE_EDITOR = "http://localhost:8501"
+
+// You want to run the automation suite without the Mockifer Editor - Mockifer will be bundled into the automation suite itself.
+def SERVER_URL_EMBEDDED_AUTOMATION = "http://localhost:8503"
+
+// Adjust this server url to reflect how you want to use Mockifer
+def SERVER_URL = SERVER_URL_EMULATOR_EDITOR
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        applicationId "mockifer.example.android"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "SERVER_BASE_URL", "\"${SERVER_URL}\"")
+    }
+
+    flavorDimensions "target"
+
+    productFlavors {
+        // The 'normal' target flavor will not embed Mockifer or its content so will have no awareness of it.
+        normal {
+            buildConfigField("Boolean", "IS_MOCK_APP", "false")
+        }
+
+        // The 'mock' target flavor will embed the Mockifer engine and content so the app can be run in a self contained offline mode.
+        mock {
+            // When running the 'mock' target of the sample app, the Mockifer engine and content are embedded and
+            // bootstrapped inside the app itself, so we can redirect all network requests to 'localhost' which
+            // means the localhost inside the emulator or device.
+            buildConfigField("String", "SERVER_BASE_URL", "\"http://localhost:8507\"")
+            buildConfigField("Boolean", "IS_MOCK_APP", "true")
+        }
+    }
+
+    // We can share the same Mockifer content between both the 'mock' app and the automation test suite
+    // to avoid double handling the content every time it is changed.
+    sourceSets {
+        mock.assets.srcDirs = ['src/mock/assets', 'mockifer']
+        androidTest.assets.srcDirs = ['src/androidTest/assets', 'mockifer']
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation('com.android.support.test.espresso:espresso-contrib:2.2.2', {
+        exclude module: 'support-annotations'
+        exclude module: 'support-v4'
+        exclude module: 'support-v13'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'design'
+    })
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:recyclerview-v7:27.0.2'
+    testImplementation 'junit:junit:4.12'
+
+    // Mock dependencies
+    // Only the 'mock' target app will embed Mockifer, the 'normal' app will not.
+    mockImplementation(name: 'mockifer', ext: 'aar')
+    // The Espresso test suite will run its own instance of Mockifer that the 'normal' app can point at if it chooses.
+    androidTestImplementation(name: 'mockifer', ext: 'aar')
+}

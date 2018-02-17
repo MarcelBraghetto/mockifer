@@ -1,7 +1,7 @@
 # Mockifer - a cross platform embeddable mocking server for iOS, Android and MacOs
 
 --
-<img src="Support/ReadMeAssets/mocky.png" alt="Mocky!" width="120px" style="float: right; margin-top: 0px; margin-left: 20px;"/>
+<img src="support/readme_assets/mocky.png" alt="Mocky!" width="120px" style="float: right; margin-top: 0px; margin-left: 20px;"/>
 
 - [Introduction](#introduction)
 - [Getting started guide](#quick_start_guide)
@@ -10,7 +10,6 @@
 - [Magic Tokens](#magic_tokens)
 - [Core engine walkthrough](#core_engine)
 - [Mockifer API](#mockifer_api)
-- [Product Binary Downloads](#binary_downloads)
 - [Licence](#licence)
 
 <a name="introduction"></a>
@@ -19,7 +18,7 @@
 
 **Mockifer** is a framework for building a portable http web server that can be embedded into mobile and other targets and used internally as a server endpoint - making it perfect for *demo* versions of an app or for automation tests with it taking the role of a *mock server*.
 
-<img src="Support/ReadMeAssets/diagram1.jpg" />
+<img src="support/readme_assets/diagram1.jpg" />
 
 Some of the key goals for the creation of **Mockifer** were:
 
@@ -36,11 +35,19 @@ There are many ways to create local web servers or mocking servers that run on t
 
 The goal of this framework is to produce a cross platform library - primarily for iOS and Android (though compatible with other targets also), that behaves like a development or mock server, but that can be **packaged internally and completely self contained** inside a host application - write **once** and compile to **many**.
 
+### Who is this for?
+
+Mockifer was created as a way to having one single common mocking platform that both developers and automation testers use the same shared instance of for all pipelines of mobile development work.
+
+It **specifically** aims at **native** mobile development for Android and iOS - **native** meaning that for iOS you are using Xcode with ObjectiveC or Swift and for Android you are using Android Studio with Java or Kotlin.
+
+If you develop mobile applications with other middleware tooling such as Xamarin, ReactJS, Cordova etc, then this library is likely not for you and you may already have some other cross platform techniques available to you that could achieve a similar goal.
+
 ### How does it work?
 
 At a glance, Mockifer is comprised of:
 
-<img src="Support/ReadMeAssets/diagram2.jpg" />
+<img src="support/readme_assets/diagram2.jpg" />
 
 **C/C++ Core Engine**
 
@@ -77,186 +84,147 @@ At a glance, Mockifer is comprised of:
 
 - The Javascript Virtual Machine is capable of running any *Ecmascript E5/E5.1* compliant Javascript code (as supported by *Duktape*).
 
-- **Mockifer** uses [Kotlin JS - https://kotlinlang.org/docs/reference/js-overview.html]("https://kotlinlang.org/docs/reference/js-overview.html") to author the dynamic server application. By using *Kotlin JS*, the server Javascript development can be done using *Android Studio* and with all the benefits of an *IntelliJ* IDE and the awesome-sauce that is *Kotlin*.
+- **Mockifer** uses [Kotlin JS - https://kotlinlang.org/docs/reference/js-overview.html]("https://kotlinlang.org/docs/reference/js-overview.html") to author the dynamic server application. By using *Kotlin JS*, the server Javascript development can be done using *Android Studio* or *IntelliJ* with all the benefits of an *IntelliJ* IDE and the awesome-sauce that is *Kotlin*.
 
-- Although the **Mockifer** framework uses *Kotlin JS*, it is completely possible to use other Javascript code instead, but I **hate** writing Javascript so I chose to go with *Kotlin JS*!
+- Although the **Mockifer** framework uses *Kotlin JS*, it is completely possible to use other Javascript code instead, but I **hate** writing Javascript so I chose to go with *Kotlin JS*! It is totally possible though to not use *Kotlin JS* at all, and instead write all your Javascript code in plain Javascript or TypeScript or something - as long as it is compatible with the *Duktape Javascript Virtual Machine*.
 
 <a name="quick_start_guide"></a>
 --
 # Getting started guide
 
-> Important: Not covered in the video tutorial but before building Mockifer for the first time, please open the Mockifer Editor project in Xcode at least once and setup your developer signing profile in the project settings. The project can be found at *Source/editor/MockiferEditor.xcodeproj*. If you do not have a valid Apple Developer account in Xcode you will not be able to build the editor application as it is a MacOS app, however you can download a precompiled binary and manually put it into the *Products* folder. Go to the [product binaries download section](#binary_downloads) to download the editor.<br/><br/>In addition for Android, you might need to configure an *ANDROID_HOME* environment variable which points to your Android SDK location. Typically this would go into your *~/.bash_profile* and look something like this: *export ANDROID_HOME=/Your/AbsolutePathTo/AndroidSDK*
-
-Video tutorial: [https://www.youtube.com/watch?v=uK-jodGaHZ0](https://www.youtube.com/watch?v=uK-jodGaHZ0)
-
-[![Mockifer - getting started](https://img.youtube.com/vi/uK-jodGaHZ0/0.jpg)](https://www.youtube.com/watch?v=uK-jodGaHZ0)
 
 Mockifer was written with mobile applications in mind - therefore it requires a few key mobile development tools to be available in order to compile and edit.
 
 By nature this pretty much means that you'll need to be working on a Mac. Mockifer could probably be adjusted to compile on Windows machines too but it's not something I'm interested in pursuing - feel free to fork this repo if you are so inclined!
 
+**Important!**
+
+Before starting, you will need to have installed [Java JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) if you haven't already. **Do not install JDK 9**. After installing the JDK, you can check that everything is ok by running the following command in a *Terminal* session:
+
+```
+java -version
+```
+
+If you see output similar to this then you are good to go:
+
+```
+java version "1.8.0_91"
+Java(TM) SE Runtime Environment (build 1.8.0_91-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.91-b14, mixed mode)
+```
+
 ### Step 1: Install prerequisite tools
 
-- Xcode along with developer provisioning. Mockifer was originally created using Xcode 8.
-- Xcode command line build tools which can be installed via:
+**iOS Framework, Mockifer Editor, Console application**
+
+If you want to be able to compile the *Mockifer Editor*, the *iOS Framework* or the *Mockifer Console Application* you will need to install Xcode along with developer provisioning. Also you will need to install Xcode command line build tools which can be installed via:
 
 ```
 xcode-select --install
 ```
 
-- Android Studio and accompanying Android SDK. Mockifer was originally created using Android Studio 2.3.
-- Android Studio Kotlin plugin. [https://kotlinlang.org/docs/tutorials/kotlin-android.html](https://kotlinlang.org/docs/tutorials/kotlin-android.html). At the time of writing, Android Studio 3 had not yet been released but once it is released, the Kotlin plugin will not need to be manually installed.
-- Android NDK and CMake which can be installed via the Android SDK Manager via Android Studio: [https://developer.android.com/ndk/guides/index.html](https://developer.android.com/ndk/guides/index.html)
+**Android AAR Library**
+
+If you want to be able to compile the *Android AAR Library* you will need to install Android Studio and the accompanying Android SDKs, along with the Android NDK and CMake which can be installed in the Android SDK Manager via Android Studio: [https://developer.android.com/ndk/guides/index.html](https://developer.android.com/ndk/guides/index.html)
+
+**Edit KotlinJS content**
+
+If you want to be able to edit the Kotlin code that generates the Mockifer content, you can either use Android Studio, or if you prefer not to install the Android tooling, you can use [IntelliJ Community Edition](https://www.jetbrains.com/idea/download/#section=mac) instead.
 
 ### Step 2: Explore the project structure
 
-The Mockifer folder structure is broken into two main sections; **Products** and **Source**.
+The Mockifer folder structure is broken into three main sections; **content**, **products** and **support**.
 
-The **products** folders contain mostly generated outputs from compiling the projects in the **source** folders. You should almost never edit content in a **product** folder, as it will be regenerated next time a build task is run.
+The **content** folder contains the *KotlinJS* project that is compiled any time the routes and data that forms the content needs to be changed. It contains both the static route JSON data files and the Kotlin code that drives more intelligent mock responses.
 
-The **products** folders are however the place where you would take a compiled library or framework to integrate into your own applications.
+The **products** folders contain mostly generated outputs from compiling the projects in the **support/source** and **content** folders. You should almost never edit content in a **product** folder, as it will be regenerated next time a build task is run.
+
+The **products** folders are however the place where you would take a compiled library or framework, or the latest compiled content to integrate into your own applications.
 
 ```
 Mockifer root directory
 |
-+ ─ Products
-|   + ─ android:        Compiled Android framework (.aar + content)
-|   + ─ console:        Compiled standalone terminal application
-|   + ─ editor:         Compiled MacOS desktop app for editing Mockifer routes
-|   + ─ ios:            Compiled iOS framework (Xcode framework + content)
-|   + ─ js:             Compiled Javascript application and supporting content
-|   + ─ sample-android: Reference project for Mockifer integration with an Android application
-|   + ─ sample-ios:     Reference project for Mockifer integration with an iOS application
-|
-+ ─ Source 
-    + ─ android:        Android framework source
-    + ─ console:        Xcode project for the terminal application
-    + ─ editor:         Xcode project for the MacOS desktop editor application
-    + ─ engine:         C/C++ core engine source - shared by reference to all other targets
-    + ─ ios:            Xcode project for the universal iOS Framework
-    + ─ js:             Kotlin JS project source for the embedded Javascript application
++ - content:            Kotlin project that compiles into the Mockifer content.
++ - build.sh:           Shell script to build the content project.
++ ─ mockifer:           Compiled standalone console application.
++ ─ MockiferEditor.app: Compiled MacOS app for editing Mockifer content.
+ 
++ ─ products
+    |
+    + - content
+      + - android:      Compiled content for an Android app.
+      + - editor:       Compiled content for Mockifer Editor or Console app.
+      + - ios:          Compiled content for an iOS app.
+    + - libs
+      + - android:      Compiled Android AAR library.
+      + - ios:          Compiled iOS framework.
+ 
++ - support:            Source code for the products except the content. Also sample apps for iOS and Android.
 
 
 ```
 
-### Step 3: Show all Mockifer Gradle tasks
+### Step 3: Test drive the editor
 
-The Mockifer project uses Gradle and a collection of shell scripts to orchestrate its build pipeline, though typically the **Mockifer Editor** MacOS application and the **Kotlin JS** project via **Android Studio** would be used to edit and build.
+To see Mockifer in action - open the *MockiferEditor.app* file in the root of the project.
 
-If all the required tools are installed and available, run the following command to show all the Mockifer related Gradle build tasks:
+Upon launching, the editor will try to build the content from the *content* project and use the compiled output in the *products/content/editor* directory as a source for its data.
 
-```
-./gradlew tasks
-```
+> Note: The first time you run the editor you might need to right click and choose *Open* and agree to run it. Also the first time the content builds it may take a while to download the Gradle dependencies required.
 
-Note that the first time running this may take some time as Gradle will fetch project dependencies if you don't already have them. If everything went ok, a list of Gradle tasks will be displayed.
+When the editor has finished building the content and is launched, you will see something similar to this:
 
-Look for the group with the heading **Mockifer tasks** which displays the following tasks:
+<img src="support/readme_assets/editor01.png" />
 
-```
-Mockifer tasks
---------------
-mockiferBuildAndroid - Build the Android .AAR engine. The framework will be generated in the /Products/android folder.
-mockiferBuildConsole - Build a console application that runs Mockifer via terminal. The application will be generated in the /Products/console folder.
-mockiferBuildEditor - Build the editor app that can run Mockifer as a desktop application and perform maintenance tasks. The app will be generated in the /Products/editor folder.
-mockiferBuildIOS - Build the iOS Framework with the embedded Javascript engine. The framework will be generated in the /Products/ios folder.
-mockiferBuildJavascriptEngine - Build the mockifer-js component that generates the Kotlin Javascript application to be embedded. Typically used internally by other tasks.
-mockiferCleanProducts - Clears all generated product outputs in the /Products/* folders.
-mockiferRunEditor - Compile the Javascript project if needed, then launch the editor application.
-mockiferBuildMobileFrameworks - Build both the iOS Framework and the Android Library along with the Mockifer engine.
-
-```
-
-### Step 4: Test drive the editor
-
-To see Mockifer in action, lets start the desktop editor application. From the root project folder, enter the following Gradle command:
-
-```
-./gradlew mockiferRunEditor
-```
-
-or use the convenience shell script:
-
-```
-./run_editor.sh
-```
-
-If the build succeeded, you should see an application appear that looks a bit like this:
-
-<img src="Support/ReadMeAssets/editor01.png" />
+> Note: The only time you would need to recompile the editor is if you want to change its behaviour. If so, you can find the source code for the editor in *support/source/editor*. It is a native MacOS application so you need to open it in Xcode. There is also a *build.sh* script in that folder that can be run to compile the editor.
 
 Explore the **registered routes** to see how the configuration system works.
 
 The editor is actually running Mockifer itself, so you can open your local web browser and point it to one of the routes to see it working! [http://localhost:8501/cats](http://localhost:8501/cats)
 
-<img src="Support/ReadMeAssets/browser01.png" />
+<img src="support/readme_assets/browser01.png" />
 
 ### Step 5: Test drive the sample apps
 
-Video tutorial: [https://www.youtube.com/watch?v=lC5Hu0fw51s](https://www.youtube.com/watch?v=lC5Hu0fw51s)
+Explore how the Mockifer engine and content is integrated into the sample apps to get an understanding of how you can use it.
 
-[![Mockifer - test drive the sample apps](https://img.youtube.com/vi/lC5Hu0fw51s/0.jpg)](https://www.youtube.com/watch?v=lC5Hu0fw51s)
-
-Quit out of the editor and run the following Gradle task to build both the *Android Library* and *iOS Frameworks*:
-
-```
-./gradlew mockiferBuildMobileFrameworks
-```
-
-You could also build each framework separately if you would like to:
-
-```
-./gradlew mockiferBuildAndroid
-```
-
-```
-./gradlew mockiferBuildIOS
-```
-
-After the mobile frameworks have successfully been built, open the following iOS sample with Xcode:
-
-```
-Products/sample-ios/MockiferSample.xcodeproj
-```
-
-And the Android sample with Android Studio:
-
-```
-Products/sample-android
-```
-Both sample projects show how to integrate **Mockifer** including a sample suite of *automation tests* that illustrate how to go about using the mocking aspect of **Mockifer** (eg *pushing* mocks in a test setup phase).
-
-> Note to readers who are seasoned developers - the sample apps are written in as basic a possible way to keep the focus on the Mockifer integration points - I am aware that some of the code is fugly!
-
-After building the mobile frameworks you can also run the shell scripts to run the example automated tests:
+To try the sample applications:
 
 **Android**
 
-> Note: Before starting the shell script, be sure you have an Android emulator running.
+For Android: Start Android Studio then open the Android project in the *support/samples/sample-android* directory.
 
-```
-./run_sample_ui_tests_android.sh
-```
+The Android app includes two product flavours **normal** and **mock**.
 
-**iOS Simulator**
+<img src="support/readme_assets/android_sample01.png" />
 
-> Note: You may need to edit the shell script to specify which simulator to run the tests on.
+The **normal** flavour does not embed Mockifer at all or really know anything about it, and the Espresso automation tests should be run against the **normal** flavour. You will need to have the *Mockifer Editor* running when running the **normal** flavour. See the *build.gradle* file for the app to find out how it works. 
 
-```
-./run_sample_ui_tests_ios_simulator.sh
-```
+The **mock** flavour has an embedded instance of Mockifer running which the app points to, making it a self contained app/server artifact.
 
-**iOS Device**
+The **Espresso automation** tests also has an embedded instance of Mockifer running, which the **normal** app can be configured to point to. This allows for automation tests to be run against the real app as a standalone solution - even on real devices.
 
-> Note: You will *definately* need to edit the shell script to specify which physical device to run the tests on.
+Examine the configuration of the *implementation* dependencies and source sets to see how Mockifer is only embedded into the **mock** and **Espresso automation** products.
 
-```
-./run_sample_ui_tests_ios_device.sh
-```
+**iOS**
+
+For iOS: Start Xcode then open the iOS project in the *support/samples/sample-ios* directory.
+
+The iOS app includes two product targets **normal** and **mock**.
+
+<img src="support/readme_assets/ios_sample01.png" />
+
+Similar to the Android app, the **normal** target does **not** embed Mockifer or really know about it, whereas the **mock** target packages an embedded instance of Mockifer inside it so is a self contained app/server artifact. You will need to have the *Mockifer Editor* running when running the **normal** target. See the build configurations for the two targets to find out how it works.
+
+The **XCTest automation suite** also has an embedded instance of Mockifer running, which the **normal** app can be configured to point to. Similar to Android, this allows for automation tests to be run against the real app as a standalone solution - even on real devices.
+
+Examine the build configurations to see how Mockifer is only embedded into the **mock** and **XCTest automation** targets.
 
 <a name="routing_system"></a>
 --
 # Dynamic routing system
+
+> Important: This video tutorial was recorded on an older version of Mockifer that had a different directory structure but the video content about how routes work is still valid.
 
 Video tutorial: [https://www.youtube.com/watch?v=jNC88N8UhyY](https://www.youtube.com/watch?v=jNC88N8UhyY)
 
@@ -306,53 +274,53 @@ As each *pushed/activated* mock route is matched to an incoming request, it is *
 --
 # Working with Mockifer
 
-Video tutorial: [https://www.youtube.com/watch?v=uik2h3ANGo0](https://www.youtube.com/watch?v=uik2h3ANGo0)
-
-[![Mockifer - getting started](https://img.youtube.com/vi/uik2h3ANGo0/0.jpg)](https://www.youtube.com/watch?v=uik2h3ANGo0)
-
 ### The editor
 
-The MacOS editor is the preferred way to manage Mockifer routes and their configurations. When using the editor, all changes are automatically *synced* into the following folders:
-
-```
-Products/js/mockifer-js
-```
-
-```
-Source/js/src/main/resources/mockifer
-```
+The *Mockifer Editor* (launched by starting the *MockiferEditor.app* file in the root directory) is the preferred way to manage Mockifer routes and their configurations. When using the editor, all changes are automatically *synced* into the content project.
 
 This means that after editing route definitions via the editor, any build job that is run afterward should already have up to date content data files.
 
-The editor can be launched directly from Android Studio (instead of using a command line Gradle task) which is the preferred way to test the Javascript application code.
+Normally all content editing should be done in the editor, and only if custom Kotlin driven mocking behaviour is required would you leave the editor.
 
-### Opening the Javascript application for editing
+
+### Opening the Kotlin/Javascript application for editing
 
 Follow these steps to be able to edit the Javascript application code (written in *Kotlin JS*):
 
-1. Open *Android Studio*
-2. Choose *Import project (Eclipse ADT, Gradle, etc.)*
-3. Navigate to the root *Mockifer* folder in the files dialog.
-4. Press *OK*
+**Step 1:** Open *IntelliJ* or *Android Studio*, if using *IntelliJ* for the very first time, you will need to setup the default location for the *JDK*. Select *Configure -> Project Defaults -> Project Structure* to open the configuration window.
+
+<img src="support/readme_assets/intellij01.png" />
+
+You will need to select the *New* button, then navigate to your installation of the *JDK*. On a Mac this is often at a folder such as:
+
+```
+/Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk
+```
+
+After selecting where your *JDK* installation is found the configuration screen should like something like this:
+
+<img src="support/readme_assets/intellij02.png" />
+
+
+**Step 2:** Choose *Import project (Eclipse ADT, Gradle, etc.)*
+
+**Step 3:** Navigate and select the *content* folder in the files dialog to open.
+
+**Step 4:** Press *OK*
 
 After the project opens and performs a Gradle sync, you should see a screen similar to this:
 
-<img src="Support/ReadMeAssets/android_studio1.png" />
+<img src="support/readme_assets/intellij04.png" />
 
-> Note: Android Studio has a nasty habit of completely deleting the contents of the hidden **.idea** folder when a new project is *imported*. This means any saved *run configurations* get deleted. After importing the Mockifer project for the first time, execute the following command from Terminal to restore the run configurations:<br><br> ```./install_run_configurations.sh``` <br><br>After installing the run configurations, a drop down list of run profiles will appear in Android Studio. This should only need to be done *once* after a fresh import of the Mockifer project.
+If you can't see the tool bar, select *View -> Toolbar* to make it appear.
 
+<img src="support/readme_assets/intellij03.png" />
 
-The project view includes the *Android Library* module and the *Javascript (Kotlin)* module.
+> Note: IntelliJ has a nasty habit of completely deleting the contents of the hidden **.idea** folder when a new project is *imported*. This means any saved *run configurations* get deleted. After importing the Mockifer project for the first time, execute the following command from Terminal while in the *content* directory to restore the run configurations:<br><br> ```./install_run_configurations.sh``` <br><br>After installing the run configurations, a drop down list of run profiles will appear in IntelliJ. This should only need to be done *once* after a fresh import of the Mockifer project.
 
-The *Android Library* module can be edited to change the resulting **.aar** artifact, but this library module would rarely need to be changed.
+The project contains all the *Kotlin JS* code that runs inside the Javascript virtual machine and is responsible for responding to requests.
 
-The *Javascript application* has the following structure:
-
-<img src="Support/ReadMeAssets/android_studio2.png" />
-
-The *java/mockifer* folder contains all the *Kotlin JS* code that runs inside the Javascript virtual machine and is responsible for responding to requests.
-
-The *resources/mockifer* folder contains the configuration content that drives the routing system and integration with the *core engine*. In particular:
+The *resources* in the project contains the configuration content that drives the routing system and integration with the *core engine*. In particular:
 
 ```
 resources/mockifer
@@ -364,51 +332,61 @@ resources/mockifer
 + ─ api.js:           Javascript file that forms the bridging contract to the core engine - do not change this
 + ─ manifest.json:    manifest of which Javascript source files should bootstrap when starting Mockifer
 + ─ routes.json:      auto generated collection of registered routes - use the editor to maintain these
++ - utils.js:         collect of helper utilities to fill some of the missing KotlinJS functionality. Some of these might become redundant as future versions of KotlinJS are released.
 
 ```
 
 ### Run profiles
 
-The **Mockifer** Gradle project has some useful preconfigured run profiles. Access them while in Android studio:
+The **Mockifer** Gradle project has some useful preconfigured run profiles. Access them while in IntelliJ:
 
-<img src="Support/ReadMeAssets/android_studio3.png" />
+<img src="support/readme_assets/intellij_dropdown.png" />
 
 When editing the *Kotlin JS* code you would normally trigger the **Run Mockifer Editor**  profile to build the Kotlin Javascript application and boot it up with the editor application.
 
+> Important: The following video was recorded on an earlier version of Mockifer that required the use of Android Studio to edit the Kotlin code. The content of this video is still valid - just follow the previous instructions on how to open the *content* project in IntelliJ (or Android Studio if you prefer) and interpolate some of the video instructions to account for the current Mockifer structure (its largely the same, just a few things moved around from the previous version).
+
+Video tutorial: [https://www.youtube.com/watch?v=uik2h3ANGo0](https://www.youtube.com/watch?v=uik2h3ANGo0)
+
+[![Mockifer - getting started](https://img.youtube.com/vi/uik2h3ANGo0/0.jpg)](https://www.youtube.com/watch?v=uik2h3ANGo0)
+
+
 ### Console application
 
-Mockifer can also run as a standalone console application via terminal as well. Build the console application with the *Build Console Application* run profile in Android Studio, or by running the following Gradle task:
+Mockifer can also run as a standalone console application via terminal as well. There is a compiled version already in this repository named **mockifer** in the root directory. To run it, just open a Terminal session in the root directory and enter:
 
 ```
-./gradlew mockiferBuildConsole
-```
-
-Then start it:
-
-```
-cd Products/console
 ./mockifer
 ```
 
-<img src="Support/ReadMeAssets/console01.png" />
+If you want to build the console application yourself, navigate into the   *support/source/console* directory in a Terminal session, then run the shell script:
+
+```
+./build.sh
+```
+
+> Note: You may have to open the console's Xcode project at least once to setup your developer signing.
+
+
+<img src="support/readme_assets/console01.png" />
 
 ### Postman
 
 Once the console application is running, Mockifer can be reached through a web browser, or any other means of making HTTP requests.
 
-A great tool for interacting with HTTP APIs is [Postman](https://www.getpostman.com/) which can be installed as a Chrome app.
+A great tool for interacting with HTTP APIs is [Postman](https://www.getpostman.com/) which can be installed as a Chrome app or as a standalone desktop application.
 
-If you have *Postman* installed, import the file ```Support/Mockifer.postman_collection.json``` to try out all the Mockifer sample routes.
+If you have *Postman* installed, import the file ```support/samples/postman/Mockifer.postman_collection.json``` to try out all the Mockifer sample routes.
 
 > Note that the Mockifer Postman samples point at port **8501** by default, which is what the *Mockifer Editor* runs on. Tweak the port number to **8504** in *Postman* if you want to connect to the console application.
 
-<img src="Support/ReadMeAssets/postman1.png" />
+<img src="support/readme_assets/postman1.png" />
 
 <a name="magic_tokens"></a>
 --
 # Magic Tokens
 
-<img src="Support/ReadMeAssets/magic_tokens.png" />
+<img src="Support/readme_assets/magic_tokens.png" />
 
 Mockifer has basic support for finding and replacing special tokens within responses with dynamically generated substitutions. For want of a better name, they are called *magic tokens* in Mockifer.
 
@@ -435,6 +413,8 @@ The following default *magic token* implementations are included in this reposit
 --
 # Core engine walkthrough
 
+> Important: The following video was recorded against an older version of Mockifer but the content is still valid. There have been a few additions and enhancements since this was recorded that are not reflected in the video.
+
 Watch the video below to learn about the core engine and how it works.
 
 Video tutorial: [https://www.youtube.com/watch?v=n9aJkoGPLIw](https://www.youtube.com/watch?v=n9aJkoGPLIw)
@@ -449,12 +429,15 @@ Both iOS and Android share the same basic set of APIs, with some small language 
 
 ### Android
 
-> Note: Mockifer itself will automatically start and stop once it is *installed* into an Android app, based on the application lifecycle callbacks and how many activities exist. If there are no known activities running within the application, Mockifer will shut itself down after a period of time.
+To use Mockifer, the AAR library needs to be compiled into an Android application, and a copy of the compiled content from the *products/content/android* directory needs to be placed in the *assets* of the Android application.
+
+After that, Mockifer can be initialised with the *install* methods during application bootstrapping.
 
 | Method        | Description |
 | ------------- |-----|
-| ```Mockifer.install(application)``` | Call this within your *onCreate* method of your *Application* class to initialize Mockifer with default configuration. |
-| ```Mockifer.install(application, port)``` | Call this within your *onCreate* method of your *Application* class along with a port number to listen on. |
+| ```Mockifer.installOnPort(application, assetsContext, port)``` | Call this within your *onCreate* method of your *Application* class or in an automation suite to initialize Mockifer. |
+| ```Mockifer.installOnDynamicPort(application, assetsContext)``` | Call this within your *onCreate* method of your *Application* class or in an automation suite to initialize Mockifer and choose a random port to listen on. |
+| ```Mockifer.setCommandUrl(baseUrl, port)``` | If you want to redirect Mockifer commands to an instance of Mockifer not embedded in the app, you can tell it where to send them. |
 | ```Mockifer.reset()``` | Call this method at any time to revert all internal state, including removal of any pending *active mock routes*. Typically used between automation tests to begin at the default state again.|
 | ```Mockifer.setGlobalResponseDelay(millis)```| Call this to configure the *global* response delay in milliseconds applied to simulate response lag. Calling ```Mockifer.reset()``` will clear this setting.|
 | ```Mockifer.clearActiveMocks()``` | Call this to remove any pending *active mock routes* that might still be queued to be evaluated for incoming requests.|
@@ -465,14 +448,16 @@ Both iOS and Android share the same basic set of APIs, with some small language 
 
 ### iOS
 
-> Note: Unlike for Android, Mockifer in iOS is *manually* started and stopped, typically in the application delegate class.
+To use Mockifer, the iOS Framework needs to be included in the iOS application along with a copy of compiled content.
 
 For brevity, only the *Swift* methods are shown below, but the Mockifer framework is actually authored in *ObjectiveC++* so all these methods are available directly from *ObjectiveC* as well.
 
 | Method        | Description |
 | ------------- |-----|
 |```Mockifer.start()```|Starts the Mockifer server if it is not already started. Typically called in the application delegate *init*.|
-|```Mockifer.start(port)```| Starts the Mockifer server on the given port if it is not already started.|
+|```Mockifer.startOnPort(port)```| Starts the Mockifer server on the given port if it is not already started.|
+|```Mockifer.startOnDynamicPort()```| Starts the Mockifer server on a dynamically selected port. The chosen port is returned. |
+|```Mockifer.setCommandUrl(baseUrl, port)``` | If you want to redirect Mockifer commands to an instance of Mockifer not embedded in the app, you can tell it where to send them. |
 |```Mockifer.stop()```| Stops the Mockifer server if it is running. Typically called in the application delegate *deinit*.|
 | ```Mockifer.reset()``` | Call this method at any time to revert all internal state, including removal of any pending *active mock routes*. Typically used between automation tests to begin at the default state again.|
 |```Mockifer.setGlobalResponseDelay(millis)```|Call this to configure the *global* response delay in milliseconds applied to simulate response lag. Calling ```Mockifer.reset()``` will clear this setting.|
@@ -481,63 +466,6 @@ For brevity, only the *Swift* methods are shown below, but the Mockifer framewor
 | ```Mockifer.pushMock(routeid, times)```| Same as ```pushMock``` but the route will be added ```times``` number of times into the active mocks list.|
 | ```Mockifer.pushMock([routeid])```| Enqueue an array of route ids, **once** each, into the active mocks list.|
 
-<a name="binary_downloads"></a>
---
-# Product Binary Downloads
-
-**Mockifer Editor**
-
-[Download Mockifer Editor Binary (mockifer_editor.zip)](Support/ReadMeAssets/BinaryDownloads/mockifer_editor.zip)
-
-After downloading, unzip and copy *MockiferEditor.app* into the following folder:
-
-```Products/editor```
-
-<img src="Support/ReadMeAssets/product_folder_editor.png" />
-
-**Mockifer Console**
-
-[Download Mockifer Console Binary (mockifer_console.zip)](Support/ReadMeAssets/BinaryDownloads/mockifer_console.zip)
-
-After downloading, unzip and copy *mockifer* into the following folder:
-
-```Products/console```
-
-<img src="Support/ReadMeAssets/product_folder_console.png" />
-
-**Mockifer iOS Framework**
-
-[Download Mockifer iOS Framework (mockifer_ios_framework.zip)](Support/ReadMeAssets/BinaryDownloads/mockifer_ios_framework.zip)
-
-After downloading, unzip and copy *Mockifer.framework* into the following folders:
-
-```Products/ios```
-
-<img src="Support/ReadMeAssets/product_folder_ios.png" />
-
-and to sync the iOS sample app:
-
-```Products/sample-ios```
-
-<img src="Support/ReadMeAssets/product_folder_sample_ios.png" />
-
-**Mockifer Android .AAR library**
-
-[Download Mockifer Android Library (mockifer_android_aar.zip)](Support/ReadMeAssets/BinaryDownloads/mockifer_android_aar.zip)
-
-After downloading, unzip and copy *mockifer.aar* into the following folders:
-
-```Products/android```
-
-<img src="Support/ReadMeAssets/product_folder_android.png" />
-
-and to sync the Android sample app:
-
-```Products/sample-android/app/libs```
-
-<img src="Support/ReadMeAssets/product_folder_sample_android.png" />
-
-Of course if you make any code changes to the source projects for any of the product binary targets, you'll need to recompile them yourself.
 
 <a name="licence"></a>
 --

@@ -1,0 +1,15 @@
+{
+  "bootstrap_javascript": [
+    "kotlin.js",
+    "mockifer.js",
+    "api.js",
+    "utils.js"
+  ],
+  "binary_response_file_types": [
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".txt",
+    ".pdf"
+  ]
+}

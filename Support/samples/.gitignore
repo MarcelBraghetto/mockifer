@@ -1,0 +1,12 @@
+ios/*
+js/*
+js/mockifer-js
+editor/*
+android/*
+console/*
+sample-ios/Mockifer.framework
+sample-ios/MockiferSample/mockifer-js
+sample-android/app/libs/mockifer.aar
+sample-android/app/src/main/assets/mockifer-js
+!*/readme.txt
+!*/*.sh

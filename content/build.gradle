@@ -1,0 +1,199 @@
+buildscript {
+    ext.kotlin_version = '1.1.4-3'
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+group 'mockifer'
+version '2.0.0'
+
+apply plugin: 'kotlin2js'
+apply plugin: 'kotlin-dce-js'
+
+def outputDir = 'out'
+def buildDir = 'build'
+def productDir = "${projectDir}/../products/content/editor/mockifer-js"
+def productAndroidDir = "${projectDir}/../products/content/android/mockifer-js"
+def productIOSDir = "${projectDir}/../products/content/ios/mockifer-js"
+def editorAppPath = "${projectDir}/../MockiferEditor.app"
+def consoleAppPath = "${projectDir}/../mockifer"
+
+compileKotlin2Js {
+    kotlinOptions.sourceMap = true
+    kotlinOptions.sourceMapEmbedSources = "always"
+}
+
+// Need to keep the Mockifer methods that are called from the 'api.js' so they don't
+// get minified out of the build.
+runDceKotlinJs.keep "content_main.mockiferProcessRequest"
+runDceKotlinJs.keep "content_main.mockiferReset"
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+}
+
+clean.doFirst() {
+    delete("${outputDir}")
+    delete("${buildDir}")
+    delete("${productDir}")
+    delete("${productAndroidDir}")
+    delete("${productIOSDir}")
+}
+
+build.doFirst() {
+    delete("${productDir}")
+    delete("${productAndroidDir}")
+    delete("${productIOSDir}")    
+}
+
+processResources.doFirst() {
+    delete("${buildDir}/resources")
+    delete("${outputDir}/mockifer")
+}
+
+build.doLast() {
+    configurations.compile.each { File file ->
+        copy {
+            includeEmptyDirs = false
+
+            from zipTree(file.absolutePath)
+            into "${projectDir}/${outputDir}"
+            include { fileTreeElement ->
+                def path = fileTreeElement.path
+                path.endsWith(".js") || (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
+            }
+        }
+    }
+
+    copy {
+        File artifact = new File("build/libs/${project.name}-${project.version}.jar")
+        includeEmptyDirs = false
+
+        from zipTree(artifact)
+        into "${outputDir}"
+        include { fileTreeElement ->
+            def path = fileTreeElement.path
+            !(path.startsWith("META-INF/") || path.startsWith("${project.name}"))
+        }
+    }
+
+    copy {
+        includeEmptyDirs = true
+        from new File("${outputDir}/mockifer/data")
+        into "${productDir}/data"
+    }
+
+    copy {
+        from new File("${outputDir}/mockifer/api.js")
+        into "${productDir}"
+    }
+
+    copy {
+        from new File("${outputDir}/mockifer/utils.js")
+        into "${productDir}"
+    }
+
+    copy {
+        from new File("${outputDir}/mockifer/manifest.json")
+        into "${productDir}"
+    }
+
+    copy {
+        from new File("${outputDir}/mockifer/routes.json")
+        into "${productDir}"
+    }
+
+    copy {
+        from new File("${buildDir}/classes/kotlin/main/min/content_main.js")
+        into "${productDir}"
+        rename { String fileName ->
+            fileName.replace('content_main.js', 'mockifer.js')
+        }
+    }
+
+    copy {
+        from new File("${buildDir}/classes/kotlin/main/min/kotlin.js")
+        into "${productDir}"
+    }
+
+    // Write a properties file that has some dynamic elements such as most recent build time.
+    def properties = new Properties()
+    def propertiesFile = new File("${productDir}/mockifer.properties")
+    properties.setProperty('last-build-time', System.currentTimeMillis() as String)
+    properties.store(propertiesFile.newWriter(), null)
+
+    delete("${outputDir}")
+}
+
+task mockiferBuildAndZip(type: Zip) {
+    dependsOn build
+
+    from fileTree("${productDir}")
+    destinationDir new File("${productDir}")
+    archiveName "mockifer-js.zip"
+    exclude "mockifer-js.zip"
+}
+
+task mockiferPackagePlatformContent() {
+    dependsOn "mockiferBuildAndZip"
+
+    doLast {
+        copy {
+            from new File("${productDir}/mockifer-js.zip")
+            into "${productAndroidDir}"
+        }
+
+        copy {
+            from new File("${productDir}/mockifer.properties")
+            into "${productAndroidDir}"
+        }
+
+        delete("${productDir}/mockifer-js.zip")
+
+        copy {
+            from new File("${productDir}")
+            into "${productIOSDir}"
+        }        
+    }
+}
+
+task mockiferBuildContent {
+    group "Mockifer"
+    description "Build the mockifer-js content and package it for each platform."
+    dependsOn "mockiferPackagePlatformContent"
+}
+
+task mockiferRunEditor {
+    group "Mockifer"
+    description "Compile the content project if needed, then launch the editor application."
+    dependsOn "mockiferBuildContent"
+
+    doLast {
+        exec {
+            workingDir '../'
+            commandLine 'open', '-a', "${editorAppPath}"
+        }
+    }
+}
+
+task mockiferRunConsole {
+    group "Mockifer"
+    description "Compile the content project if needed, then launch the terminal console application."
+    dependsOn "mockiferBuildContent"
+
+    doLast {
+        exec {
+            workingDir '../'
+            commandLine 'sh', "./${consoleAppPath}"
+        }
+    }
+}
+
