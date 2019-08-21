@@ -45,6 +45,7 @@ public:
     // User methods
     static uint startOnDynamicPort(const string &contentPath);
     static void start(const string &contentPath, const string &port);
+    static void startCustom(const string &contentPath, const int &customPort);
     static void stop();
     static void reset();
     static bool pushMock(const string &mockRouteId, const int &times);

@@ -31,6 +31,7 @@
 #include <thread>
 #include <random>
 #include <algorithm>
+#include <string>
 #include "MockiferServer.h"
 #include "MockiferRequest.h"
 #include "MockiferUtil.h"
@@ -192,6 +193,16 @@ void MockiferServer::start(const string &contentPath, const string &port) {
     }
 
     sServer = new MockiferServer(contentPath, port);
+    sServer->startServer();
+}
+
+void MockiferServer::startCustom(const string &contentPath, const int &customPort) {
+    if (sServer) {
+        return;
+    }
+    
+    auto customPortString = std::to_string(customPort);
+    sServer = new MockiferServer(contentPath, customPortString);
     sServer->startServer();
 }
 
