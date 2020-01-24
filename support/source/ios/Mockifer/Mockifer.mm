@@ -41,7 +41,7 @@
 }
 
 + (void) startWithContentPath: (nonnull NSString *) contentPath {
-    NSString *port = @"8505";
+    NSString *port = @"8502";
     mockifer::MockiferServer::start([contentPath UTF8String], [port UTF8String]);
 }
 

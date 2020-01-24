@@ -7,7 +7,7 @@ echo '======================================================='
 echo ''
 
 FRAMEWORK_NAME="Mockifer"
-PRODUCT_PATH_ROOT="./../../../Automation/MockiferEcobee/FrameworkBuild"
+PRODUCT_PATH_ROOT="./../../../products/libs/ios"
 PRODUCT_PATH="${PRODUCT_PATH_ROOT}/${FRAMEWORK_NAME}.framework"
 
 echo 'Mockifer: iOS Framework: Cleaning build folder...'
