@@ -39,7 +39,7 @@ if [ -d "./build" ]; then
 rm -rf "./build"
 fi
 
-echo "Mockifer: iOS Framework: Build complete! Find '${FRAMEWORK_NAME}.framework' in the 'Automation/MockiferEcobee/FrameworkBuild' folder. See the 'sample-ios' project to find out how to integrate the framework."
+echo "Mockifer: iOS Framework: Build complete! Find '${FRAMEWORK_NAME}.framework' in the 'products/libs/ios' folder. See the 'sample-ios' project to find out how to integrate the framework."
 echo ''
 echo '======================================================='
 echo 'MOCKIFER: iOS FRAMEWORK BUILD FINISHED'
