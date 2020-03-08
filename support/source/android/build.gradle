@@ -2,24 +2,30 @@
 
 buildscript {
     repositories {
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.6.1'
     }
+}
+
+repositories {
+    google()
+    jcenter()
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 29
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 2
-        versionName "2.0"
+        targetSdkVersion 29
+        versionCode 3
+        versionName "3.0"
 
         externalNativeBuild {
             cmake {

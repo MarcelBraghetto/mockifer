@@ -36,7 +36,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             if let httpResponse = response as? HTTPURLResponse {
                 if (httpResponse.statusCode >= 400) {
-                    let responseText = String(data: data, encoding: .utf8) as String! ?? ""
+                    let responseText = String(data: data, encoding: .utf8) as String? ?? ""
                     self.showNetworkErrorAlert(message: "Status code: \(httpResponse.statusCode)\n\(responseText)")
                 }
             }

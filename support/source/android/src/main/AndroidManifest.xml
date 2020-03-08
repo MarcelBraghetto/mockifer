@@ -1,5 +1,5 @@
 <manifest
-        package="mockifer"
+        package="io.github.marcelbraghetto.mockifer"
         xmlns:android="http://schemas.android.com/apk/res/android"
         >
 

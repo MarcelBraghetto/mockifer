@@ -31,7 +31,12 @@
 #include "MockiferServer.h"
 
 extern "C"
-JNIEXPORT void JNICALL Java_mockifer_Mockifer_nativeSetCommandUrl(JNIEnv* env, jobject, jstring jBaseUrl, jint jPort) {
+JNIEXPORT void JNICALL Java_io_github_marcelbraghetto_mockifer_Mockifer_nativeSetCommandUrl(
+        JNIEnv* env,
+        jclass clazz,
+        jstring jBaseUrl,
+        jint jPort
+) {
     const char *baseUrl = env->GetStringUTFChars(jBaseUrl, JNI_FALSE);
 
     mockifer::MockiferServer::setCommandUrl(baseUrl, (int) jPort);
@@ -40,7 +45,12 @@ JNIEXPORT void JNICALL Java_mockifer_Mockifer_nativeSetCommandUrl(JNIEnv* env, j
 }
 
 extern "C"
-JNIEXPORT void JNICALL Java_mockifer_Mockifer_nativeStartServerOnPort(JNIEnv* env, jobject, jstring jContentPath, jstring jPort) {
+JNIEXPORT void JNICALL Java_io_github_marcelbraghetto_mockifer_Mockifer_nativeStartServerOnPort(
+        JNIEnv* env,
+        jclass clazz,
+        jstring jContentPath,
+        jstring jPort
+) {
     const char *contentPath = env->GetStringUTFChars(jContentPath, JNI_FALSE);
     const char *port = env->GetStringUTFChars(jPort, JNI_FALSE);
 
@@ -51,7 +61,11 @@ JNIEXPORT void JNICALL Java_mockifer_Mockifer_nativeStartServerOnPort(JNIEnv* en
 }
 
 extern "C"
-JNIEXPORT int JNICALL Java_mockifer_Mockifer_nativeStartServerOnDynamicPort(JNIEnv* env, jobject, jstring jContentPath) {
+JNIEXPORT int JNICALL Java_io_github_marcelbraghetto_mockifer_Mockifer_nativeStartServerOnDynamicPort(
+        JNIEnv* env,
+        jclass clazz,
+        jstring jContentPath
+) {
     const char *contentPath = env->GetStringUTFChars(jContentPath, JNI_FALSE);
 
     int port = mockifer::MockiferServer::startOnDynamicPort(contentPath);
@@ -62,22 +76,36 @@ JNIEXPORT int JNICALL Java_mockifer_Mockifer_nativeStartServerOnDynamicPort(JNIE
 }
 
 extern "C"
-JNIEXPORT void JNICALL Java_mockifer_Mockifer_nativeSetGlobalResponseDelay(JNIEnv* env, jobject, jint jDelay) {
+JNIEXPORT void JNICALL Java_io_github_marcelbraghetto_mockifer_Mockifer_nativeSetGlobalResponseDelay(
+        JNIEnv* env,
+        jclass clazz,
+        jint jDelay
+) {
     mockifer::MockiferServer::setGlobalResponseDelay((uint) jDelay);
 }
 
 extern "C"
-JNIEXPORT void JNICALL Java_mockifer_Mockifer_nativeStopServer(JNIEnv* env, jobject) {
+JNIEXPORT void JNICALL Java_io_github_marcelbraghetto_mockifer_Mockifer_nativeStopServer(
+        JNIEnv* env,
+        jclass clazz
+) {
     mockifer::MockiferServer::stop();
 }
 
 extern "C"
-JNIEXPORT void JNICALL Java_mockifer_Mockifer_nativeResetServer(JNIEnv* env, jobject) {
+JNIEXPORT void JNICALL Java_io_github_marcelbraghetto_mockifer_Mockifer_nativeResetServer(
+        JNIEnv* env,
+        jclass clazz
+) {
     mockifer::MockiferServer::reset();
 }
 
 extern "C"
-JNIEXPORT void JNICALL Java_mockifer_Mockifer_nativePushMock(JNIEnv* env, jobject, jstring jMockRouteId, jint jTimes) {
+JNIEXPORT void JNICALL Java_io_github_marcelbraghetto_mockifer_Mockifer_nativePushMock(
+        JNIEnv* env, jclass clazz,
+        jstring jMockRouteId,
+        jint jTimes
+) {
     const char *mockRouteId = env->GetStringUTFChars(jMockRouteId, JNI_FALSE);
     int times = (int) jTimes;
 
@@ -87,6 +115,9 @@ JNIEXPORT void JNICALL Java_mockifer_Mockifer_nativePushMock(JNIEnv* env, jobjec
 }
 
 extern "C"
-JNIEXPORT void JNICALL Java_mockifer_Mockifer_nativeClearActiveMocks(JNIEnv* env, jobject) {
+JNIEXPORT void JNICALL Java_io_github_marcelbraghetto_mockifer_Mockifer_nativeClearActiveMocks(
+        JNIEnv* env,
+        jclass clazz
+) {
     mockifer::MockiferServer::clearActiveMocks();
 }

@@ -10,7 +10,8 @@ class BaseViewController: NSViewController, NSWindowDelegate {
         self.view.window?.delegate = nil
     }
     
-    func windowShouldClose(_ sender: Any) {
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
         NSApplication.shared.terminate(self)
+        return true
     }
 }

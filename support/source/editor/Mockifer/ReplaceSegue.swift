@@ -9,10 +9,10 @@ class ReplaceSegue: NSStoryboardSegue {
         if (source == nil) {
             let window = NSApplication.shared.keyWindow
             window?.contentViewController = destination
-            window?.contentViewController?.removeFromParentViewController()
+            window?.contentViewController?.removeFromParent()
         } else {
             source?.view.window?.contentViewController = destination
-            source?.removeFromParentViewController()
+            source?.removeFromParent()
         }
     }
 }
