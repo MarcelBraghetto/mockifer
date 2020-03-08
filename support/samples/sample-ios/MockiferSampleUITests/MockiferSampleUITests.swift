@@ -1,6 +1,10 @@
 import XCTest
 import Mockifer
 
+// Note: Don't forget to adjust the ServerConfig.serverPort to run automation against
+// the self contained Mockifer instance. In a real project the server port should be
+// configured automatically as part of your solution so you don't need to manually
+// change it.
 class MockiferSampleUITests: XCTestCase {
     static var hasSetupMockifer = false
     

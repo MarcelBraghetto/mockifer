@@ -219,7 +219,7 @@
 		E24C87F91EEA2A1700DDFFB8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1030;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = Mockifer;
 				TargetAttributes = {
 					E24C88011EEA2A1700DDFFB8 = {
@@ -322,7 +322,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
