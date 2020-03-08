@@ -112,14 +112,14 @@
  
  */
 function mockifer_handleServerRequest(requestJson, routeJson) {
-    return content_main.mockiferProcessRequest(requestJson, routeJson);
+    return content.mockiferProcessRequest(requestJson, routeJson);
 }
 
 /*
  Reset the internal server session state to its defaults.
 */
 function mockifer_reset() {
-    content_main.mockiferReset();
+    content.mockiferReset();
 }
 
 /*
