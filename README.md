@@ -12,6 +12,8 @@
 - [Mockifer API](#mockifer_api)
 - [Licence](#licence)
 
+> Important: Starting from release version 2 of Mockifer in this Github repository, the precompiled 'products' and binaries (console application, editor) will no longer be checked into version control. You can build all the products and binaries yourself with the 'build_all_products.sh' script or you can download the precompiled products and binaries on the releases page.
+
 <a name="introduction"></a>
 --
 # Introduction
