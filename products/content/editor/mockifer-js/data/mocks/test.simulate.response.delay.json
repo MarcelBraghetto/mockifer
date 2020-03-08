@@ -1,3 +1,0 @@
-{
-	"message": "I was delivered after a simulated delay! The server can also have a global delay set by using the 'Mockifer.setGlobalResponseDelay() method."
-}
