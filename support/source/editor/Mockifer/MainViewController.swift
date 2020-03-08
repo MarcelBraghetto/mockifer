@@ -428,7 +428,7 @@ class MainViewController : BaseViewController, NSTableViewDelegate, NSTextViewDe
         alert.runModal()
     }
     
-    override func controlTextDidChange(_ obj: Notification) {
+    func controlTextDidChange(_ obj: Notification) {
         guard let target = obj.object as? NSTextField else {
             return
         }

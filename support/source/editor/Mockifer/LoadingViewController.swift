@@ -104,7 +104,7 @@ class LoadingViewController : BaseViewController {
                     
                     self.appendLoadingTextLine(text: "\(self.tag) Mockifer engine booted, navigating to editor.\(self.lineBreak)")
 
-                    self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "NavigateToMain"), sender: nil)
+                    self.performSegue(withIdentifier: "NavigateToMain", sender: nil)
                 }
             }
         }
