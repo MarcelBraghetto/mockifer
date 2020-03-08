@@ -49,6 +49,10 @@
     mockifer::MockiferServer::setCommandUrl([baseUrl UTF8String], port);
 }
 
++ (void) startWithPathPort: (nonnull NSString *) contentPath onPort: (uint) customPort {
+    mockifer::MockiferServer::startCustom([contentPath UTF8String], customPort);
+}
+
 + (void) startOnPort:(nonnull NSString *)port {
     NSString* jsPath = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] bundlePath], @"mockifer-js"];
     mockifer::MockiferServer::start([jsPath UTF8String], [port UTF8String]);

@@ -66,6 +66,12 @@ FOUNDATION_EXPORT const unsigned char MockiferVersionString[];
 + (void) setCommandUrl: (nonnull NSString *) baseUrl onPort: (uint) port;
 
 /*
+ Created by Rishi Khan to allow for the use of content path with a custom port not available in original source code
+ */
++ (void) startWithPathPort: (nonnull NSString *) contentPath onPort: (uint) customPort;
+
+
+/*
  Set a global delay to apply for each request to simulate network timings. Calling 'reset' clears this value.
  */
 + (void) setGlobalResponseDelay: (uint) responseDelayMillis;
