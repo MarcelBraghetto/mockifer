@@ -13,6 +13,20 @@
 - [Licence](#licence)
 
 > Important: Starting from release version 2 of Mockifer in this Github repository, the precompiled 'products' and binaries (console application, editor) will no longer be checked into version control. You can build all the products and binaries yourself with the 'build_all_products.sh' script or you can download the precompiled products and binaries on the releases page.
+> 
+> After cloning this repository, download the binaries for the same release and unzip them into the cloned folder so your folder looks like this (I have marked the downloaded binaries you need to copy over with a + symbol):
+
+```
+build_all_products.sh
+build_content.sh
+content
+LICENSE
++ mockifer
++ MockiferEditor.app
++ products
+README.md
+support
+```
 
 <a name="introduction"></a>
 --

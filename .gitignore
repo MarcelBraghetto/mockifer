@@ -9,3 +9,6 @@ local.properties
 out
 .gradle
 *.iml
+/mockifer
+/MockiferEditor.app
+/products
