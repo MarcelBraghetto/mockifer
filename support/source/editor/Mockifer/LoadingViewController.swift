@@ -49,13 +49,18 @@ class LoadingViewController : BaseViewController {
         }
         
         var compilationSuccessful = false
+
+        self.appendLoadingTextLine(text: "\(self.tag) App folder: \(self.appFolder)\(self.lineBreak)")
+
+        let buildScriptPath = "\(self.appFolder)/build_content.sh"
+        self.appendLoadingTextLine(text: "\(self.tag) Build script: \(buildScriptPath)\(self.lineBreak)")
         
-        if (FileManager.default.fileExists(atPath: "\(self.appFolder)/build_content.sh")) {
+        if (FileManager.default.fileExists(atPath: buildScriptPath)) {
             self.appendLoadingTextLine(text: "\(self.tag) Invoking compilation script.\(self.lineBreak)\(self.keyLine)\(self.lineBreak)")
             
             // Kick off the compilation script to cause the content to be recompiled fresh.
             let task = Process()
-            task.launchPath = "\(self.appFolder)/build_content.sh"
+            task.launchPath = buildScriptPath
             
             let pipe = Pipe()
             task.standardOutput = pipe
