@@ -404,10 +404,11 @@ int MockiferServer::handleRequest(struct mg_connection *connection) {
     string requestBody{""};
     auto requestBodyLength = requestInfo->content_length;
     if (requestBodyLength > 0) {
-        char buf[requestBodyLength + 1];
-        mg_read(connection, buf, requestBodyLength);
-        buf[requestBodyLength] = '\0';
-        requestBody = string(buf);
+        char* requestBodyBuffer = (char*)(malloc(requestBodyLength + 1));
+        mg_read(connection, requestBodyBuffer, requestBodyLength);
+        requestBodyBuffer[requestBodyLength] = '\0';
+        requestBody = string(requestBodyBuffer);
+        free(requestBodyBuffer);
     }
 
     // Parse the request into a request object
